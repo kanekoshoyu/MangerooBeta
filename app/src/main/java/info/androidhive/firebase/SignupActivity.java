@@ -46,7 +46,7 @@ public class SignupActivity extends AppCompatActivity {
         inputUsername = (EditText) findViewById(R.id.username);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
-        inputPhoneNumber = (EditText) findViewById(R.id.phonenNumber);
+        inputPhoneNumber = (EditText) findViewById(R.id.phoneNumber);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
 

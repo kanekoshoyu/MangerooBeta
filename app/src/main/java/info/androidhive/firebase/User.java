@@ -20,5 +20,7 @@ public class User {
         this.free = "free";
         this.phoneNumber = phoneNumber;
     }
-
+    public String toString(){
+        return username;
+    }
 }
