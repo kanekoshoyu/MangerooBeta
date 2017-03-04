@@ -22,9 +22,17 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:weightSum="1">
+            <SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchButton"
+                android:gravity="right"
+                android:iconifiedByDefault="true"
+                android:layout_weight="0.07" />
         </android.support.v7.widget.Toolbar>
+
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"

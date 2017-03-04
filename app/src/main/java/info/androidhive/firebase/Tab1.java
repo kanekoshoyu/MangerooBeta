@@ -39,6 +39,8 @@ public class Tab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1, container, false);
+        final Switch mSwitchFree = (Switch) rootView.findViewById(R.id.switchFree);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         ListView friendListView = (ListView) rootView.findViewById(R.id.friendList_view);
@@ -51,12 +53,17 @@ public class Tab1 extends Fragment {
 
         mFreeRef = mDatabase.child("users").child(UID).child("free");
 
+
         mDatabase.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userNames.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    if(!postSnapshot.getKey().equals(UID)){
+                    if(postSnapshot.getKey().equals(UID)){
+                        if(postSnapshot.getValue(User.class).getFree().equals("free")){
+                            mSwitchFree.setChecked(true);
+                        }
+                    }else if(postSnapshot.getValue(User.class).getFree().equals("free")){
                         userNames.add(postSnapshot.getValue(User.class).getUsername() + "");
                         adapter.notifyDataSetChanged();
                     }
@@ -70,7 +77,7 @@ public class Tab1 extends Fragment {
         });
 
 
-        Switch mSwitchFree = (Switch) rootView.findViewById(R.id.switchFree);
+
         mFreeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
