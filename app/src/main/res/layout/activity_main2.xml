@@ -24,13 +24,16 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:weightSum="1">
-            <SearchView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/searchButton"
-                android:gravity="right"
+                android:gravity="end"
                 android:iconifiedByDefault="true"
-                android:layout_weight="0.07" />
+                android:layout_weight="0.07"
+                android:src="@drawable/ic_search_white_48dp"
+                android:contentDescription="" />
+
         </android.support.v7.widget.Toolbar>
 
 
