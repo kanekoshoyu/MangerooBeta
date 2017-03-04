@@ -20,14 +20,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText inputEmail, inputPassword, inputUsername;
+    private EditText inputEmail, inputPassword, inputUsername, inputPhoneNumber;
     private Button btnSignIn, btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
     private DatabaseReference mDatabase;
 
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
+    private void writeNewUser(String userId, String name, String email, String phoneNumber) {
+        User user = new User(name, email, phoneNumber);
 
         mDatabase.child("users").child(userId).setValue(user);
     }
@@ -46,6 +46,7 @@ public class SignupActivity extends AppCompatActivity {
         inputUsername = (EditText) findViewById(R.id.username);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
+        inputPhoneNumber = (EditText) findViewById(R.id.phonenNumber);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
 
@@ -70,6 +71,7 @@ public class SignupActivity extends AppCompatActivity {
                 final String email = inputEmail.getText().toString().trim();
                 final String username = inputUsername.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
+                final String phoneNumber = inputPhoneNumber.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -109,7 +111,7 @@ public class SignupActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Hi", Toast.LENGTH_SHORT).show();
 
                                     String UID = auth.getCurrentUser().getUid();
-                                    writeNewUser(UID, username, email);
+                                    writeNewUser(UID, username, email, phoneNumber);
                                     startActivity(new Intent(SignupActivity.this, MainActivity.class));
                                     finish();
                                 }
