@@ -5,10 +5,10 @@ package info.androidhive.firebase;
  */
 public class User {
 
-    public String username;
-    public String email;
-    public String free;
-    public String phoneNumber;
+    private String username;
+    private String email;
+    private String free;
+    private String phoneNumber;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -20,6 +20,23 @@ public class User {
         this.free = "free";
         this.phoneNumber = phoneNumber;
     }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public String getFree(){
+        return free;
+    }
+
+    public String getPhoneNumber(){
+        return phoneNumber;
+    }
+
     public String toString(){
         return username;
     }
