@@ -22,39 +22,14 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Tab1 extends Fragment {
 
-    DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mConditionRef = mRef.child("");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1, container, false);
 
-        Switch mSwitchFree = (Switch) rootView.findViewById(R.id.switchFree);
-        final TextView mTextViewList = (TextView) rootView.findViewById(R.id.textViewList);
 
-        mConditionRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String text = dataSnapshot.getValue(String.class);
-                mTextViewList.setText(text);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        mSwitchFree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            //Switch is pressed
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
-                    mConditionRef.setValue("Shoyu is free now for dining");
-                else
-                    mConditionRef.setValue("Shoyu is not free");
-            }
-        });
 
         return rootView;
 

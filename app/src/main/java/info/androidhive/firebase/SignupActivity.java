@@ -24,7 +24,13 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignIn, btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
-    private DatabaseReference mDatabaseUsers;
+    private DatabaseReference mDatabase;
+
+    private void writeNewUser(String userId, String name, String email) {
+        User user = new User(name, email);
+
+        mDatabase.child("users").child(userId).setValue(user);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,7 @@ public class SignupActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
@@ -61,8 +67,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = inputEmail.getText().toString().trim();
-                String username = inputUsername.getText().toString().trim();
+                final String email = inputEmail.getText().toString().trim();
+                final String username = inputUsername.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
@@ -102,13 +108,8 @@ public class SignupActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Hi", Toast.LENGTH_SHORT).show();
 
-
-                                    /*
-                                    final String UID = auth.getCurrentUser().getUid();
-                                    mDatabaseUsers.child(UID).child("username").setValue(inputUsername);
-                                    mDatabaseUsers.child(UID).child("password").setValue(inputPassword);
-                                    mDatabaseUsers.child(UID).child("email").setValue(inputEmail);
-                                    */
+                                    String UID = auth.getCurrentUser().getUid();
+                                    writeNewUser(UID, username, email);
                                     startActivity(new Intent(SignupActivity.this, MainActivity.class));
                                     finish();
                                 }
