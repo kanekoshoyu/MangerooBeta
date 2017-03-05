@@ -2,12 +2,14 @@ package info.androidhive.firebase;
 
 import java.util.*;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -53,12 +55,28 @@ public class Tab1 extends Fragment {
 
         mFreeRef = mDatabase.child("users").child(UID).child("free");
 
+        friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+
+                String item = ((TextView)view).getText().toString();
+                String status = "free friend";
+                Intent intent = new Intent(getActivity(), UserDataActivity.class);
+                intent.putExtra("NAME", item);
+                intent.putExtra("STATUS", status);
+                startActivity(intent);
+
+            }
+        });
 
         mDatabase.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userNames.clear();
+
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    //Updates Friend List here
                     if(postSnapshot.getKey().equals(UID)){
                         if(postSnapshot.getValue(User.class).getFree().equals("free")){
                             mSwitchFree.setChecked(true);

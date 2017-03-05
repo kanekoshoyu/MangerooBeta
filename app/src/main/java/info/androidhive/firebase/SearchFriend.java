@@ -1,11 +1,16 @@
 package info.androidhive.firebase;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -35,25 +40,44 @@ public class SearchFriend extends AppCompatActivity {
         String query;
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        ListView friendListView = (ListView) findViewById(R.id.friendSearch_List);
         //creates the adapter for the ListView, and show the ListView
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userNames);
+        ListView friendListView = (ListView) findViewById(R.id.friendSearch_List);
+        NewFriendAdapter useradapter;
+
         friendListView.setAdapter(adapter);
+
 
         auth = FirebaseAuth.getInstance();
         final String UID = auth.getCurrentUser().getUid();
-
         mFreeRef = mDatabase.child("users").child(UID).child("free");
+
+
+        friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+
+                String item = ((TextView)view).getText().toString();
+                String status = "not friend";
+                Intent intent = new Intent(SearchFriend.this, UserDataActivity.class);
+                intent.putExtra("NAME", item);
+                intent.putExtra("STATUS", status);
+                startActivity(intent);
+
+
+            }
+        });
+
 
         mDatabase.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userNames.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    if(postSnapshot.getValue(User.class).getFree().equals("free")){
                         userNames.add(postSnapshot.getValue(User.class).getUsername() + "");
                         adapter.notifyDataSetChanged();
-                    }
+
                 }
             }
 

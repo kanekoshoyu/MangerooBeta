@@ -15,6 +15,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/switchFree"/>
 
+    <TextView
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Available Friends"/>
     <ListView
         android:id="@+id/friendList_view"
         android:layout_width="match_parent"

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,6 +78,15 @@ public class Tab3 extends Fragment{
         Button signOut = (Button) rootView.findViewById(R.id.sign_out);
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
         //creates the adapter for the ListView, and show the ListView
+        /*
+        TextView tv2 = (TextView) rootView.findViewById(R.id.tv_email);
+        TextView tv1 = (TextView) rootView.findViewById(R.id.tv_phone);
+        TextView tv0 = (TextView) rootView.findViewById(R.id.tv_name);
+        tv0.setText(info[0]);
+        tv1.setText(info[1]);
+        tv2.setText(info[2]);
+        */
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, info);
         listView.setAdapter(adapter);
 
