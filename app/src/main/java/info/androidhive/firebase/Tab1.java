@@ -36,6 +36,8 @@ public class Tab1 extends Fragment {
     private DatabaseReference mFreeRef;
     private FirebaseAuth auth;
     private ArrayList<String> userNames = new ArrayList<>();
+    private ArrayList<String> userIds = new ArrayList<>();
+    private ArrayList<String> myFriends = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,30 +61,39 @@ public class Tab1 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-
+                Toast.makeText(getActivity(),Integer.toString(position), Toast.LENGTH_SHORT);
+                Toast.makeText(getActivity(),Long.toString(id), Toast.LENGTH_SHORT);
                 String item = ((TextView)view).getText().toString();
-                String status = "free friend";
+                String status = "friend";
                 Intent intent = new Intent(getActivity(), UserDataActivity.class);
                 intent.putExtra("NAME", item);
                 intent.putExtra("STATUS", status);
+                intent.putExtra("UID", userIds.get(position));
                 startActivity(intent);
 
             }
         });
 
+
         mDatabase.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                myFriends.clear();;
+                for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("friends").getChildren()) {
+                    myFriends.add(postSnapshot.getValue(String.class));
+                }
                 userNames.clear();
-
+                userIds.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     //Updates Friend List here
                     if(postSnapshot.getKey().equals(UID)){
                         if(postSnapshot.getValue(User.class).getFree().equals("free")){
                             mSwitchFree.setChecked(true);
                         }
-                    }else if(postSnapshot.getValue(User.class).getFree().equals("free")){
+                    }else if(myFriends.contains(postSnapshot.getKey()) &&
+                            postSnapshot.getValue(User.class).getFree().equals("free")){
                         userNames.add(postSnapshot.getValue(User.class).getUsername() + "");
+                        userIds.add(postSnapshot.getKey());
                         adapter.notifyDataSetChanged();
                     }
                 }

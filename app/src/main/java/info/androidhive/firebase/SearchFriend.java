@@ -28,6 +28,7 @@ public class SearchFriend extends AppCompatActivity {
     private DatabaseReference mFreeRef;
     private FirebaseAuth auth;
     private ArrayList<String> userNames = new ArrayList<>();
+    private ArrayList<String> userIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class SearchFriend extends AppCompatActivity {
                 Intent intent = new Intent(SearchFriend.this, UserDataActivity.class);
                 intent.putExtra("NAME", item);
                 intent.putExtra("STATUS", status);
+                intent.putExtra("UID", userIds.get(position));
                 startActivity(intent);
 
 
@@ -74,10 +76,11 @@ public class SearchFriend extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userNames.clear();
+                userIds.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                         userNames.add(postSnapshot.getValue(User.class).getUsername() + "");
                         adapter.notifyDataSetChanged();
-
+                        userIds.add(postSnapshot.getKey());
                 }
             }
 
