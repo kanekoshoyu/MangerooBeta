@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,9 +43,10 @@ public class Tab1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab1, container, false);
+        final View rootView = inflater.inflate(R.layout.tab1, container, false);
         final Switch mSwitchFree = (Switch) rootView.findViewById(R.id.switchFree);
 
+        final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         ListView friendListView = (ListView) rootView.findViewById(R.id.friendList_view);
@@ -74,14 +76,14 @@ public class Tab1 extends Fragment {
             }
         });
 
-
         mDatabase.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                myFriends.clear();;
+                myFriends.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("friends").getChildren()) {
                     myFriends.add(postSnapshot.getValue(String.class));
                 }
+                progressBar.setVisibility(View.GONE);
                 userNames.clear();
                 userIds.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {

@@ -16,7 +16,6 @@ tools:context="info.androidhive.firebase.SearchFriend">
     android:id="@+id/appbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/appbar_padding_top"
     android:theme="@style/AppTheme.AppBarOverlay">
 
     <android.support.v7.widget.Toolbar
@@ -31,12 +30,20 @@ tools:context="info.androidhive.firebase.SearchFriend">
             android:layout_height="wrap_content"
             android:id="@+id/searchView"
             android:gravity="end"
-            android:iconifiedByDefault="true"
-            android:layout_weight="0.07" />
+            android:iconifiedByDefault="false"/>
 
     </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>
+
+    <ProgressBar
+        android:layout_marginTop="@dimen/padding_normal"
+        android:id="@+id/progressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="20dp"
+        android:visibility="visible" />
 
     <ListView
         android:layout_width="match_parent"

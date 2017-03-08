@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import static android.view.View.GONE;
 
 public class SearchFriend extends AppCompatActivity {
 
@@ -37,6 +40,7 @@ public class SearchFriend extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_search_friend);
+        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
         myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         SearchView searchView = (SearchView) findViewById(R.id.searchView);
@@ -86,6 +90,7 @@ public class SearchFriend extends AppCompatActivity {
                             userIds.add(postSnapshot.getKey());
                         }
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
