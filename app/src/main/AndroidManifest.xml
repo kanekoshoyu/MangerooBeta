@@ -38,7 +38,8 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SearchFriend" />
-        <activity android:name=".UserDataActivity"></activity>
+        <activity android:name=".UserDataActivity" />
+        <activity android:name=".UserDataSetting"></activity>
     </application>
 
 </manifest>

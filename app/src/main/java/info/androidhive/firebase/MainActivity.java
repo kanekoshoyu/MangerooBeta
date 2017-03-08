@@ -59,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, SearchFriend.class));
                         // do what ever you want here
                 }
+                switch (item.getItemId()) {
+                    case (R.id.action_userdata):
+                        startActivity(new Intent(MainActivity.this, UserDataSetting.class));
+                        // do what ever you want here
+                }
                 return true;
             }
         });
@@ -95,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /*
+    Some bullshit here
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -110,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+*/
     /**
      * A placeholder fragment containing a simple view.
      */
