@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return "Activities";
                 case 2:
-                    return "Profile";
+                    return "Invitations";
             }
             return null;
         }

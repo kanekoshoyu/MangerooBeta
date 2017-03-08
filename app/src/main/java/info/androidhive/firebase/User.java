@@ -11,7 +11,6 @@ public class User {
     private String email;
     private String free;
     private String phoneNumber;
-    private ArrayList<String> friendList;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -21,10 +20,6 @@ public class User {
         this.email = email;
         this.free = "free";
         this.phoneNumber = phoneNumber;
-        this.friendList = new ArrayList<String>();
-        friendList.add("Hi, this is first");
-        friendList.add("Yo, this is second");
-        friendList.add("Wow, this is never ends");
     }
 
     public String getUsername(){

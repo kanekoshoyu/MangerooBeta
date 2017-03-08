@@ -21,17 +21,53 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 /**
  * Created by shoyu on 16/2/2017.
  */
 
 public class Tab3 extends Fragment {
+    private DatabaseReference mDatabaseRef;
+    private DatabaseReference mInvitationRef;
+    private FirebaseAuth auth;
+    private ArrayList<String> myInvitations = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Inflate the View first to facilitate findViewById
         View rootView = inflater.inflate(R.layout.tab3, container, false);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+
+        ListView invitationListView = (ListView) rootView.findViewById(R.id.invitationList_view);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, myInvitations);
+        invitationListView.setAdapter(adapter);
+
+        auth = FirebaseAuth.getInstance();
+        final String UID = auth.getCurrentUser().getUid();
+
+        mInvitationRef = mDatabaseRef.child("users").child(UID).child("invitations");
+
+        mDatabaseRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                myInvitations.clear();;
+                for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("invitations").getChildren()) {
+                    String InvitationUID = postSnapshot.getKey();
+                    String InvitationTime = postSnapshot.getValue(String.class);
+                    DataSnapshot tempSnapshot = dataSnapshot.child(InvitationUID);
+                    String InvitationUserName = tempSnapshot.getValue(User.class).getUsername();
+                    myInvitations.add(InvitationUserName + " (" + InvitationTime + ")");
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
 
         return rootView;
     }

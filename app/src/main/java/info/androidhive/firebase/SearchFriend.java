@@ -29,6 +29,7 @@ public class SearchFriend extends AppCompatActivity {
     private FirebaseAuth auth;
     private ArrayList<String> userNames = new ArrayList<>();
     private ArrayList<String> userIds = new ArrayList<>();
+    private String myUID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class SearchFriend extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_search_friend);
+        myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         SearchView searchView = (SearchView) findViewById(R.id.searchView);
         String query;
@@ -78,9 +80,11 @@ public class SearchFriend extends AppCompatActivity {
                 userNames.clear();
                 userIds.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                        userNames.add(postSnapshot.getValue(User.class).getUsername() + "");
-                        adapter.notifyDataSetChanged();
-                        userIds.add(postSnapshot.getKey());
+                        if(!postSnapshot.getKey().equals(myUID)) {
+                            userNames.add(postSnapshot.getValue(User.class).getUsername() + "");
+                            adapter.notifyDataSetChanged();
+                            userIds.add(postSnapshot.getKey());
+                        }
                 }
             }
 

@@ -9,4 +9,13 @@
     android:orientation="vertical"
     tools:context="info.androidhive.firebase.MainActivity">
 
+    <TextView
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invitations"/>
+    <ListView
+        android:id="@+id/invitationList_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
