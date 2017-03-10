@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="8dp"
     tools:context="info.androidhive.firebase.MainActivity"
     android:orientation="vertical">
 
     <Switch
         android:padding="@dimen/padding_normal"
         android:text="Free for Lunch"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/switchFree"/>
@@ -16,10 +18,13 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"/>
     <TextView
-        android:padding="@dimen/padding_normal"
+        android:padding="@dimen/padding_slim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Available Friends"/>
+        android:text="Available Friends"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/div_bg"/>
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="30dp"

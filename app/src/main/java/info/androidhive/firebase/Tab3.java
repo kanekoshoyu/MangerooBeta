@@ -20,15 +20,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.ArrayList;
+
+import info.androidhive.firebase.fcm.MyFirebaseMessagingService;
 
 /**
  * Created by shoyu on 16/2/2017.
  */
 
 public class Tab3 extends Fragment {
-    private DatabaseReference mDatabaseRef;
+    private DatabaseReference mUsers;
     private DatabaseReference mInvitationRef;
     private FirebaseAuth auth;
     private ArrayList<String> myInvitations = new ArrayList<>();
@@ -38,7 +41,7 @@ public class Tab3 extends Fragment {
                              Bundle savedInstanceState) {
         //Inflate the View first to facilitate findViewById
         View rootView = inflater.inflate(R.layout.tab3, container, false);
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        mUsers = FirebaseDatabase.getInstance().getReference().child("users");
 
         ListView invitationListView = (ListView) rootView.findViewById(R.id.invitationList_view);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, myInvitations);
@@ -46,21 +49,22 @@ public class Tab3 extends Fragment {
 
         auth = FirebaseAuth.getInstance();
         final String UID = auth.getCurrentUser().getUid();
+        mInvitationRef = mUsers.child(UID).child("invitations");
 
-        mInvitationRef = mDatabaseRef.child("users").child(UID).child("invitations");
-
-        mDatabaseRef.child("users").addValueEventListener(new ValueEventListener() {
+        mUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                myInvitations.clear();;
+                myInvitations.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("invitations").getChildren()) {
                     String InvitationUID = postSnapshot.getKey();
                     String InvitationTime = postSnapshot.getValue(String.class);
                     DataSnapshot tempSnapshot = dataSnapshot.child(InvitationUID);
                     String InvitationUserName = tempSnapshot.getValue(User.class).getUsername();
                     myInvitations.add(InvitationUserName + " (" + InvitationTime + ")");
+
                 }
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override

@@ -11,6 +11,7 @@ public class User {
     private String email;
     private String free;
     private String phoneNumber;
+    private String token;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -36,6 +37,10 @@ public class User {
 
     public String getPhoneNumber(){
         return phoneNumber;
+    }
+
+    public String getToken(){
+        return token;
     }
 
     public String toString(){

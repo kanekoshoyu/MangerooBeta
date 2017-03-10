@@ -48,7 +48,6 @@ public class UserDataActivity extends AppCompatActivity {
         final TextView tv_unfriend = (TextView) findViewById(R.id.tv_unfriend);
         final Button btn_Invite = (Button) findViewById(R.id.btn_invite);
         final Button btn_Add = (Button) findViewById(R.id.btn_add);
-        //if(extras !=null) {
 
         myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         name = extras.getString("NAME");
@@ -61,10 +60,7 @@ public class UserDataActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 tv_free.setText(dataSnapshot.getValue(User.class).getFree());
-
-
                 //Toast.makeText(UserDataActivity.this, dataSnapshot.child("invitations").child(myUID).getValue(String.class) , Toast.LENGTH_SHORT).show();
-
                 if(dataSnapshot.child("invitations").child(myUID).exists())
                     tv_lastInvitation.setText("Last Invitation: " + dataSnapshot.child("invitations").child(myUID).getValue(String.class));
 
@@ -88,6 +84,7 @@ public class UserDataActivity extends AppCompatActivity {
                 throw databaseError.toException();
             }
         });
+
         mDatabase.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -114,10 +111,8 @@ public class UserDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getApplicationContext(),"Invitation has been sent", Toast.LENGTH_LONG);
-
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users").child(myUID);
                 //myRef.child("friends").child(UID).setValue("");
-
                 myRef.child("friends").push().setValue(UID);
                 Toast.makeText(getApplicationContext(),name + "is now your friend", Toast.LENGTH_LONG).show();
 
@@ -125,20 +120,19 @@ public class UserDataActivity extends AppCompatActivity {
             }
         });
 
-
         btn_Invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date now = new Date();
                 String strDate = sdf.format(now);
                 mDatabase.child("users").child(UID).child("invitations").child(myUID).setValue(strDate);
+                mDatabase.child("users").child(UID).child("notifications").child("invitation").child(myUID).setValue(strDate);
+
                 Toast.makeText(UserDataActivity.this, "You have sent an invitation!", Toast.LENGTH_SHORT).show();
             }
         });
-
-        //}
 
         tv_unfriend.setOnClickListener(new View.OnClickListener() {
             @Override

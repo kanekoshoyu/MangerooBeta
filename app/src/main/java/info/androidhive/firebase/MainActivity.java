@@ -1,6 +1,8 @@
 package info.androidhive.firebase;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,6 +28,10 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import info.androidhive.firebase.fcm.NotificationService;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -43,11 +49,16 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    NotificationService service;
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        System.out.println("onCreate(), TOKEN: " + FirebaseInstanceId.getInstance().getToken());
 
+        //service.createNotification();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -91,13 +102,10 @@ public class MainActivity extends AppCompatActivity {
         */
 
     }
-
     //edit Toolbar here
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main2, menu);
-
         return true;
     }
 
@@ -119,18 +127,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 */
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public PlaceholderFragment() {
-        }
+    public static class PlaceholderFragment extends Fragment {
+
+        private static final String ARG_SECTION_NUMBER = "section_number";
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -151,11 +151,9 @@ public class MainActivity extends AppCompatActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
         @Override
         public Fragment getItem(int position) {
             switch (position) {
@@ -171,13 +169,10 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return 3; // Show 3 total pages.
         }
-
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
@@ -190,6 +185,5 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-
     }
 }

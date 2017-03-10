@@ -4,12 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="info.androidhive.firebase.MainActivity">
-
-    <TextView
-        android:padding="@dimen/padding_normal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Invitations"/>
     <ListView
         android:id="@+id/invitationList_view"
         android:layout_width="match_parent"

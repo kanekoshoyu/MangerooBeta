@@ -114,7 +114,7 @@
 
     <TextView
         android:id="@+id/tv_lastInvitation"
-        android:text="show"
+        android:text="You have not invited before"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

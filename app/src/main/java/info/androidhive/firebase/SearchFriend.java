@@ -40,14 +40,12 @@ public class SearchFriend extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_search_friend);
+
         final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
         myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         SearchView searchView = (SearchView) findViewById(R.id.searchView);
-        String query;
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        //creates the adapter for the ListView, and show the ListView
+
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userNames);
         ListView friendListView = (ListView) findViewById(R.id.friendSearch_List);
         NewFriendAdapter useradapter;

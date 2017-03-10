@@ -13,6 +13,6 @@
     <item
         android:id="@+id/action_userdata"
         android:orderInCategory="100"
-        android:title="User Data"
+        android:title="Account"
         app:showAsAction="never" />
 </menu>

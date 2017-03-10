@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 /**
  * Created by shoyu on 16/2/2017.
@@ -33,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Tab1 extends Fragment {
 
-    private DatabaseReference mDatabase;
+    private DatabaseReference mUsers;
     private DatabaseReference mFreeRef;
     private FirebaseAuth auth;
     private ArrayList<String> userNames = new ArrayList<>();
@@ -45,19 +46,16 @@ public class Tab1 extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.tab1, container, false);
         final Switch mSwitchFree = (Switch) rootView.findViewById(R.id.switchFree);
-
         final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        mUsers = FirebaseDatabase.getInstance().getReference().child("users");
         ListView friendListView = (ListView) rootView.findViewById(R.id.friendList_view);
-        //creates the adapter for the ListView, and show the ListView
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, userNames);
         friendListView.setAdapter(adapter);
 
         auth = FirebaseAuth.getInstance();
         final String UID = auth.getCurrentUser().getUid();
-
-        mFreeRef = mDatabase.child("users").child(UID).child("free");
+        mFreeRef = mUsers.child(UID).child("free");
+        mUsers.child(UID).child("token").setValue(FirebaseInstanceId.getInstance().getToken());
 
         friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -76,16 +74,18 @@ public class Tab1 extends Fragment {
             }
         });
 
-        mDatabase.child("users").addValueEventListener(new ValueEventListener() {
+        mUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 myFriends.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("friends").getChildren()) {
                     myFriends.add(postSnapshot.getValue(String.class));
                 }
+
                 progressBar.setVisibility(View.GONE);
                 userNames.clear();
                 userIds.clear();
+
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     //Updates Friend List here
                     if(postSnapshot.getKey().equals(UID)){
@@ -107,34 +107,17 @@ public class Tab1 extends Fragment {
             }
         });
 
-
-
-        mFreeRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
         mSwitchFree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             //Switch is pressed
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked)
                     mFreeRef.setValue("free");
-
                 else
                     mFreeRef.setValue("not free");
             }
         });
 
         return rootView;
-
-
     }
 }
