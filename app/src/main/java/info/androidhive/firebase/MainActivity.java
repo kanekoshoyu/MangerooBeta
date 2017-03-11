@@ -32,8 +32,6 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import info.androidhive.firebase.fcm.NotificationService;
-
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -56,9 +54,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
-
-
         startService(new Intent(this, MyIntentService.class));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -179,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return "Instant";
                 case 1:
-                    return "Activities";
+                    return "Gatherings";
                 case 2:
                     return "Invitations";
             }

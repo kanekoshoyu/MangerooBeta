@@ -5,7 +5,7 @@ package info.androidhive.firebase;
  */
 
 public class Me {
-    static String myName;
-    static String myUID;
+    static String myName = "PK";
+    static String myUID = "PK";
 
 }
