@@ -60,9 +60,6 @@ public class MyIntentService extends IntentService {
             }
         });
 
-
-        Toast.makeText(MyIntentService.this, "Hello, this seems working well", Toast.LENGTH_LONG).show();
-        Log.i(TAG, "Service has started");
         /*
         if (intent != null) {
             final String action = intent.getAction();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/setting_userdata"
     android:layout_width="match_parent"
@@ -8,11 +9,25 @@
     tools:context="info.androidhive.firebase.UserDataSetting"
     android:padding="@dimen/padding_normal">
 
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/iv_icon"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@color/colorPrimaryLight"
+
+        android:layout_gravity="center_horizontal"
+        app:civ_border_width="3dp"
+        app:civ_border_color="@color/colorPrimaryDark"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/padding_normal">
+
+
         <TextView
             android:text="Username"
             android:layout_width="match_parent"
@@ -71,5 +86,7 @@
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
         android:padding="@dimen/padding_normal"/>
+
+
 
 </LinearLayout>

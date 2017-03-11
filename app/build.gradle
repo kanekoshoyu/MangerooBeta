@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "info.androidhive.firebase"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -17,21 +17,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    dexOptions{
+    dexOptions {
         javaMaxHeapSize "4g"
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.google.firebase:firebase-auth:10.2.0'
     compile 'com.google.firebase:firebase-database:10.2.0'
     compile 'com.google.firebase:firebase-core:10.2.0'
     compile 'com.google.firebase:firebase-messaging:10.2.0'
-    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:design:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
+    compile 'com.google.firebase:firebase-storage:10.2.0'
+    compile 'com.firebaseui:firebase-ui-storage:1.2.0'
     testCompile 'junit:junit:4.12'
+    compile files('lib/CircleImageView-master/gradle/wrapper/gradle-wrapper.jar')
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
