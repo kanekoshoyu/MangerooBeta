@@ -2,6 +2,7 @@ package info.androidhive.firebase;
 
 import android.content.Intent;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -49,16 +51,16 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    NotificationService service;
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        System.out.println("onCreate(), TOKEN: " + FirebaseInstanceId.getInstance().getToken());
 
-        //service.createNotification();
+
+
+        startService(new Intent(this, MyIntentService.class));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -68,12 +70,10 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case (R.id.action_search):
                         startActivity(new Intent(MainActivity.this, SearchFriend.class));
-                        // do what ever you want here
                 }
                 switch (item.getItemId()) {
                     case (R.id.action_userdata):
                         startActivity(new Intent(MainActivity.this, UserDataSetting.class));
-                        // do what ever you want here
                 }
                 return true;
             }

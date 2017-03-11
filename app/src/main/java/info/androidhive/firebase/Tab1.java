@@ -77,6 +77,9 @@ public class Tab1 extends Fragment {
         mUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Me.myName = dataSnapshot.child(UID).child("username").getValue(String.class);
+                Me.myUID = UID;
+
                 myFriends.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("friends").getChildren()) {
                     myFriends.add(postSnapshot.getValue(String.class));

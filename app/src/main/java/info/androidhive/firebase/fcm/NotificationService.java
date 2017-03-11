@@ -16,13 +16,6 @@ import android.widget.Toast;
 import info.androidhive.firebase.MainActivity;
 import info.androidhive.firebase.R;
 
-
-/**
- * An {@link IntentService} subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
- * <p>
- * TODO: Customize class - update intent actions and extra parameters.
- */
 public class NotificationService extends IntentService {
     private static final String TAG = NotificationService.class.getSimpleName();
     public static final int NOTIFICATION_ID = 234;
@@ -41,7 +34,8 @@ public class NotificationService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.v(TAG, "In onHandleIntent. Message will be printed after 10sec");
+        Toast.makeText(this, "Yahoo", Toast.LENGTH_SHORT).show();
+
         if (intent != null) {
             synchronized (this){
                 try {
