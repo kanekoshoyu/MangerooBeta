@@ -2,6 +2,7 @@ package info.androidhive.firebase;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -131,7 +132,8 @@ public class UserDataActivity extends AppCompatActivity {
                 mDatabase.child("users").child(UID).child("notifications").child("invitations").child(myUID).child("time").setValue(strDate);
                 mDatabase.child("users").child(UID).child("notifications").child("invitations").child(myUID).child("username").setValue(Me.myName);
 
-                Toast.makeText(UserDataActivity.this, "You have sent an invitation!", Toast.LENGTH_SHORT).show();
+                Snackbar.make(v, "You have sent an invitation!", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
             }
         });
 
