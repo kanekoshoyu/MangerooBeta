@@ -59,10 +59,6 @@ public class MyIntentService extends IntentService {
                 throw databaseError.toException();
             }
         });
-
-
-        Toast.makeText(MyIntentService.this, "Hello, this seems working well", Toast.LENGTH_LONG).show();
-        Log.i(TAG, "Service has started");
         /*
         if (intent != null) {
             final String action = intent.getAction();

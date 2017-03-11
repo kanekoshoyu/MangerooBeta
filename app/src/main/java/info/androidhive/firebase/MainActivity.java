@@ -32,8 +32,6 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import info.androidhive.firebase.fcm.NotificationService;
-
 public class MainActivity extends AppCompatActivity {
 
     /**
