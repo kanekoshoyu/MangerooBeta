@@ -70,7 +70,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".MyIntentService"
+            android:name=".fcm.MyIntentService"
             android:exported="false" />
 
         <activity android:name=".AddGatheringActivity"></activity>

@@ -43,38 +43,60 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_normal"
         android:orientation="horizontal">
-        <TextView
+        <ImageView
+            android:paddingRight="@dimen/padding_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time"
-            android:layout_weight="1"/>
+            android:src="@drawable/ic_date_range_black_24dp" />
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="On"
+                android:inputType="datetime"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_normal"
+        android:orientation="horizontal">
+        <ImageView
+            android:paddingRight="@dimen/padding_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="5">
+            android:src="@drawable/ic_access_time_black_24dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <EditText
                 android:id="@+id/GatheringStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:hint="From"
                 android:inputType="datetime"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
-                android:layout_weight="5"
-                />
+                android:layout_weight="1"
+                android:background="@android:color/transparent"/>
             <EditText
                 android:id="@+id/GatheringEndTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:hint="To"
                 android:inputType="datetime"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
-                android:layout_weight="5"
-                />
+                android:layout_weight="1"
+                android:background="@android:color/transparent"/>
         </LinearLayout>
     </LinearLayout>
     <View
@@ -86,22 +108,20 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_normal"
         android:orientation="horizontal">
-
-        <TextView
+        <ImageView
+            android:paddingRight="@dimen/padding_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Venue" />
+            android:src="@drawable/ic_place_black_24dp"/>
         <EditText
             android:id="@+id/GatheringPlace"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="Place"
+            android:hint="At"
             android:inputType="text"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
-            android:layout_weight="5"/>
+            android:background="@android:color/transparent"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
