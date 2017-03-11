@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return "Instant";
                 case 1:
-                    return "Activities";
+                    return "Gatherings";
                 case 2:
                     return "Invitations";
             }

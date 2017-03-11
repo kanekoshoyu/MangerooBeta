@@ -129,8 +129,6 @@ public class UserDataActivity extends AppCompatActivity {
                 String strDate = sdf.format(now);
                 mDatabase.child("users").child(UID).child("invitations").child(myUID).setValue(strDate);
                 mDatabase.child("users").child(UID).child("notifications").child("invitations").child(myUID).child("time").setValue(strDate);
-
-
                 mDatabase.child("users").child(UID).child("notifications").child("invitations").child(myUID).child("username").setValue(Me.myName);
 
                 Toast.makeText(UserDataActivity.this, "You have sent an invitation!", Toast.LENGTH_SHORT).show();
