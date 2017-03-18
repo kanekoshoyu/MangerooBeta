@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import info.androidhive.firebase.fcm.MyFirebaseMessagingService;
 
@@ -36,6 +37,8 @@ public class Tab3 extends Fragment {
     private FirebaseAuth auth;
     private ArrayList<String> myInvitations = new ArrayList<>();
 
+    private List<Invitation> InvitationArrayList = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class Tab3 extends Fragment {
         mUsers = FirebaseDatabase.getInstance().getReference().child("users");
 
         ListView invitationListView = (ListView) rootView.findViewById(R.id.invitationList_view);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, myInvitations);
+        final InvitationAdapter adapter = new InvitationAdapter(getActivity(), InvitationArrayList);
         invitationListView.setAdapter(adapter);
 
         auth = FirebaseAuth.getInstance();
@@ -55,12 +58,14 @@ public class Tab3 extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 myInvitations.clear();
+                InvitationArrayList.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("invitations").getChildren()) {
                     String InvitationUID = postSnapshot.getKey();
                     String InvitationTime = postSnapshot.getValue(String.class);
                     DataSnapshot tempSnapshot = dataSnapshot.child(InvitationUID);
                     String InvitationUserName = tempSnapshot.getValue(User.class).getUsername();
-                    myInvitations.add(InvitationUserName + " (" + InvitationTime + ")");
+
+                    InvitationArrayList.add(new Invitation(InvitationUID, InvitationUserName, InvitationTime));
 
                 }
                 adapter.notifyDataSetChanged();
