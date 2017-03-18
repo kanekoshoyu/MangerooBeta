@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-android:orientation="horizontal"
-    android:id="@+id/friendSearch"
-    android:focusableInTouchMode="true">
-
-<TextView
-    android:layout_width="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_weight="2"
-    android:gravity="center_vertical"
-    android:textColor="@color/black"
-    android:text="Friend Name Here" />
+    android:orientation="horizontal"
+    android:id="@+id/friendSearch"
+    android:focusableInTouchMode="true"
+    android:padding="@dimen/padding_normal">
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Contact"
-    android:onClick="addFriend()"
-    android:background="@color/colorAccent"/>
-</LinearLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/iv_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@color/colorPrimaryLight"
+
+        android:layout_gravity="center_horizontal"
+        app:civ_border_width="3dp"
+        app:civ_border_color="@color/colorPrimaryDark"/>
+    <TextView
+        android:text="Friend Name Here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:layout_alignBottom="@+id/iv_icon"
+        android:layout_toRightOf="@+id/iv_icon"
+        android:layout_toEndOf="@+id/iv_icon"
+        android:padding="@dimen/padding_normal" />
+</RelativeLayout>
