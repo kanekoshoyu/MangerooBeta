@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 switch (item.getItemId()) {
                     case (R.id.action_userdata):
-                        startActivity(new Intent(MainActivity.this, UserDataSetting.class));
+                        startActivity(new Intent(MainActivity.this, MyDataSetting.class));
                 }
                 return true;
             }

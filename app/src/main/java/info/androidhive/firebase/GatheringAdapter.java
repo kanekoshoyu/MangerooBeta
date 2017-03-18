@@ -10,11 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomBaseAdapter extends BaseAdapter {
+public class GatheringAdapter extends BaseAdapter {
     Context context;
     List<Gathering> rowItems;
 
-    public CustomBaseAdapter(Context context, List<Gathering> items) {
+    public GatheringAdapter(Context context, List<Gathering> items) {
         this.context = context;
         this.rowItems = items;
     }
@@ -32,7 +32,7 @@ public class CustomBaseAdapter extends BaseAdapter {
         LayoutInflater mInflater = (LayoutInflater)
                 context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.gathering_list_item, null);
+            convertView = mInflater.inflate(R.layout.row_gathering, null);
             holder = new ViewHolder();
             holder.txtDate = (TextView) convertView.findViewById(R.id.listGatheringDate);
             holder.txtTitle = (TextView) convertView.findViewById(R.id.listGatheringTitle);

@@ -83,7 +83,7 @@
                 android:id="@+id/tv_gatheringstarttime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/darker_gray"
                 android:layout_weight="1"/>
             <TextView
                 android:textSize="@dimen/padding_normal"
@@ -91,7 +91,7 @@
                 android:id="@+id/tv_gatheringendtime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/darker_gray"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>

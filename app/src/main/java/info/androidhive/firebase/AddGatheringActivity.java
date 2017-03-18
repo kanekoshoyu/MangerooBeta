@@ -2,6 +2,7 @@ package info.androidhive.firebase;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
@@ -135,6 +136,7 @@ public class AddGatheringActivity extends AppCompatActivity {
             calendarStartTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             calendarStartTime.set(Calendar.MINUTE, minute);
             GatheringStartTime.setText(Tformat.format(calendarStartTime.getTime()));
+            GatheringStartTime.setTextColor(Color.BLACK);
         }
     };
     TimePickerDialog.OnTimeSetListener tEnd = new TimePickerDialog.OnTimeSetListener() {
@@ -143,6 +145,8 @@ public class AddGatheringActivity extends AppCompatActivity {
             calendarEndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             calendarEndTime.set(Calendar.MINUTE, minute);
             GatheringEndTime.setText(Tformat.format(calendarEndTime.getTime()));
+            GatheringEndTime.setTextColor(Color.BLACK);
+
         }
     };
 }

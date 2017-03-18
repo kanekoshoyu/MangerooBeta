@@ -1,8 +1,6 @@
 package info.androidhive.firebase;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -28,7 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class UserDataSetting extends AppCompatActivity {
+public class MyDataSetting extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private DatabaseReference mUserRef;
@@ -36,7 +33,7 @@ public class UserDataSetting extends AppCompatActivity {
     private FirebaseAuth auth;
     private ImageView iv;
 
-    public UserDataSetting() {
+    public MyDataSetting() {
     }
 
     private void downloadImg(ImageView iv){
@@ -97,7 +94,7 @@ if(iv!=null) {
             @Override
             public void onClick(View v) {
                 auth.signOut();
-                startActivity(new Intent(UserDataSetting.this, LoginActivity.class));
+                startActivity(new Intent(MyDataSetting.this, LoginActivity.class));
                 finish();
             }
         });
