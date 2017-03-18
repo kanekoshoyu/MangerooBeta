@@ -4,12 +4,13 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal"
     android:id="@+id/friendSearch"
-    android:focusableInTouchMode="true"
-    android:padding="@dimen/padding_normal">
+    android:focusableInTouchMode="false"
+    android:padding="@dimen/padding_normal"
+    android:focusable="false">
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/iv_icon"
+        android:id="@+id/listFriendIcon"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:src="@color/colorPrimaryLight"
@@ -18,14 +19,15 @@
         app:civ_border_width="3dp"
         app:civ_border_color="@color/colorPrimaryDark"/>
     <TextView
+        android:id="@+id/listFriendName"
         android:text="Friend Name Here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:gravity="center_vertical"
         android:textColor="@color/black"
-        android:layout_alignBottom="@+id/iv_icon"
-        android:layout_toRightOf="@+id/iv_icon"
-        android:layout_toEndOf="@+id/iv_icon"
+        android:layout_alignBottom="@+id/listFriendIcon"
+        android:layout_toRightOf="@+id/listFriendIcon"
+        android:layout_toEndOf="@+id/listFriendIcon"
         android:padding="@dimen/padding_normal" />
 </RelativeLayout>

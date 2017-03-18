@@ -56,7 +56,7 @@ if(iv!=null) {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting_userdata);
+        setContentView(R.layout.setting_mydata);
         Button signOut = (Button) findViewById(R.id.sign_out);
 
         final TextView tv2 = (TextView) findViewById(R.id.tv_email);

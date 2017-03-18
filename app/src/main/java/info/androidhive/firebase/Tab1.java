@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,8 @@ public class Tab1 extends Fragment {
     private ArrayList<String> userIds = new ArrayList<>();
     private ArrayList<String> myFriends = new ArrayList<>();
 
+    private List<User> FriendArrayList = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,8 +51,9 @@ public class Tab1 extends Fragment {
         final Switch mSwitchFree = (Switch) rootView.findViewById(R.id.switchFree);
         final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         mUsers = FirebaseDatabase.getInstance().getReference().child("users");
+
         ListView friendListView = (ListView) rootView.findViewById(R.id.friendList_view);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, userNames);
+        final AvailableFriendAdapter adapter = new AvailableFriendAdapter(getActivity(), FriendArrayList);
         friendListView.setAdapter(adapter);
 
         auth = FirebaseAuth.getInstance();
@@ -61,12 +65,11 @@ public class Tab1 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Toast.makeText(getActivity(),Integer.toString(position), Toast.LENGTH_SHORT);
-                Toast.makeText(getActivity(),Long.toString(id), Toast.LENGTH_SHORT);
-                String item = ((TextView)view).getText().toString();
+                //Toast.makeText(getActivity(),Integer.toString(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),Long.toString(id), Toast.LENGTH_SHORT).show();
                 String status = "friend";
                 Intent intent = new Intent(getActivity(), UserDataActivity.class);
-                intent.putExtra("NAME", item);
+                intent.putExtra("NAME", userNames.get(position));
                 intent.putExtra("STATUS", status);
                 intent.putExtra("UID", userIds.get(position));
                 startActivity(intent);
@@ -81,6 +84,7 @@ public class Tab1 extends Fragment {
                 Me.myUID = UID;
 
                 myFriends.clear();
+                FriendArrayList.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("friends").getChildren()) {
                     myFriends.add(postSnapshot.getValue(String.class));
                 }
@@ -99,6 +103,8 @@ public class Tab1 extends Fragment {
                             postSnapshot.getValue(User.class).getFree().equals("free")){
                         userNames.add(postSnapshot.getValue(User.class).getUsername() + "");
                         userIds.add(postSnapshot.getKey());
+
+                        FriendArrayList.add(postSnapshot.getValue(User.class));
                         adapter.notifyDataSetChanged();
                     }
                 }
