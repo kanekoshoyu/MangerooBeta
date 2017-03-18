@@ -14,10 +14,16 @@
         android:layout_height="wrap_content"
         android:text="Manage activities here"/>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+    <ListView
+        android:id="@+id/gatheringList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_alignParentBottom="true"
