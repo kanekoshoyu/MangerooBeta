@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -69,6 +70,18 @@ public class Tab1 extends Fragment {
 
             }
         });
+
+        //just for testing here
+        Button buttonConfirm = (Button) rootView.findViewById(R.id.button_confirmation);
+        buttonConfirm.setOnClickListener(new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String status = "friend";
+                Intent intent = new Intent(getActivity(), ConfirmationActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         mUsers.addValueEventListener(new ValueEventListener() {
             @Override

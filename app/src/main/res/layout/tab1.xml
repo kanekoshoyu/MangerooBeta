@@ -25,6 +25,11 @@
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
         android:background="@color/div_bg"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to the confirmation activity (just for trial)"
+        android:id="@+id/button_confirmation"/>
     <ProgressBar
         android:padding="@dimen/padding_normal"
         android:id="@+id/progressBar"
@@ -36,6 +41,7 @@
         android:id="@+id/friendList_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 
 
 </LinearLayout>
