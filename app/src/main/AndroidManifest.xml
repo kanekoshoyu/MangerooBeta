@@ -50,7 +50,8 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SearchFriend" />
-        <activity android:name=".UserDataActivity" />
+        <activity android:name=".DetailUserActivity" />
+        <activity android:name=".DetailGatheringActivity" />
         <activity android:name=".MyDataSetting" />
 
         <service android:name=".fcm.MyFirebaseMessagingService">

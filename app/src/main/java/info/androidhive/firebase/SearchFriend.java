@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,8 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
-import static android.view.View.GONE;
 
 public class SearchFriend extends AppCompatActivity {
 
@@ -65,7 +62,7 @@ public class SearchFriend extends AppCompatActivity {
 
                 String item = ((TextView)view).getText().toString();
                 String status = "not friend";
-                Intent intent = new Intent(SearchFriend.this, UserDataActivity.class);
+                Intent intent = new Intent(SearchFriend.this, DetailUserActivity.class);
                 intent.putExtra("NAME", item);
                 intent.putExtra("STATUS", status);
                 intent.putExtra("UID", userIds.get(position));

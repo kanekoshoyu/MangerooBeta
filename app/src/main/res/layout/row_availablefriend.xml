@@ -30,4 +30,19 @@
         android:layout_toRightOf="@+id/listFriendIcon"
         android:layout_toEndOf="@+id/listFriendIcon"
         android:padding="@dimen/padding_normal" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="Invite"
+        android:theme="@style/RedButton"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="Accept"
+        android:theme="@style/GreenButton"
+        android:visibility="gone"/>
 </RelativeLayout>

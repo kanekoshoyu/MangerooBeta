@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_normal"
     android:orientation="vertical"
-    tools:context="info.androidhive.firebase.UserDataActivity">
+    tools:context="info.androidhive.firebase.DetailUserActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,14 +15,14 @@
         android:orientation="horizontal">
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Username"
+            android:text="Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:layout_weight="1"/>
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Your Username"
+            android:text="Title of Gathering"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_name"
@@ -36,17 +36,57 @@
         android:orientation="horizontal">
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="E-mail"
+            android:text="Venue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"/>
+        <TextView
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="venue details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="Time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"/>
+        <TextView
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="Time details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="Person-in-charge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_emailTag"
             android:layout_weight="1" />
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Your Email"
+            android:text="username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_email"
+            android:id="@+id/text"
             android:layout_weight="1"/>
     </LinearLayout>
 
@@ -57,17 +97,16 @@
         android:orientation="horizontal">
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Phone Number"
+            android:text="Going"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_phoneTag"
             android:layout_weight="1" />
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Your Phone number"
+            android:text="friend username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_phone"
             android:layout_weight="1"/>
     </LinearLayout>
 
@@ -78,47 +117,28 @@
         android:orientation="horizontal">
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Availability"
+            android:text="Interested"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_freeTag"
             android:layout_weight="1" />
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Your Availability"
+            android:text="friend username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_free"
             android:layout_weight="1"/>
     </LinearLayout>
 
     <Button
-        android:text="Add as Friend"
+        android:text="Invite Friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_add"
-        android:background="@color/colorAccent"
+        android:theme="@style/RedButton"
         android:textColor="@android:color/white"
         android:layout_marginBottom="20dp"
         />
-
-    <Button
-        android:text="Send Dining Invitation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_invite"
-        android:background="@color/colorAccent"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="20dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_lastInvitation"
-        android:text="You have not invited before"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-    />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -131,7 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:text="Unfriend"
+            android:text="Quit"
             android:textAlignment="center"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"

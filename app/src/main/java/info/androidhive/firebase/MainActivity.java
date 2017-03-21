@@ -159,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return "Instant";
                 case 1:
-                    return "Gatherings";
+                    return "Gather";
                 case 2:
-                    return "Invitations";
+                    return "Coupons";
             }
             return null;
         }

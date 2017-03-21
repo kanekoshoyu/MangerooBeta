@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +28,6 @@ public class Tab2 extends Fragment{
 
     private DatabaseReference mGatherings;
     private List<Gathering> gatheringArrayList = new ArrayList<>();
-    private ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,9 +45,22 @@ public class Tab2 extends Fragment{
             }
         });
 
-        listView = (ListView) rootView.findViewById(R.id.gatheringList);
+        ListView gatheringListView = (ListView) rootView.findViewById(R.id.gatheringList);
         final GatheringAdapter adapter = new GatheringAdapter(getActivity(), gatheringArrayList);
-        listView.setAdapter(adapter);
+        gatheringListView.setAdapter(adapter);
+
+        gatheringListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                //Toast.makeText(getActivity(),Integer.toString(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),Long.toString(id), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), DetailGatheringActivity.class);
+                //Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         mGatherings.addValueEventListener(new ValueEventListener() {
             @Override

@@ -40,20 +40,16 @@ public class Tab3 extends Fragment {
     private List<Invitation> InvitationArrayList = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        //Inflate the View first to facilitate findViewById
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab3, container, false);
+        /*
         mUsers = FirebaseDatabase.getInstance().getReference().child("users");
-
         ListView invitationListView = (ListView) rootView.findViewById(R.id.invitationList_view);
         final InvitationAdapter adapter = new InvitationAdapter(getActivity(), InvitationArrayList);
         invitationListView.setAdapter(adapter);
-
         auth = FirebaseAuth.getInstance();
         final String UID = auth.getCurrentUser().getUid();
         mInvitationRef = mUsers.child(UID).child("invitations");
-
         mUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -71,12 +67,12 @@ public class Tab3 extends Fragment {
                 adapter.notifyDataSetChanged();
 
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 throw databaseError.toException();
             }
         });
+        */
 
         return rootView;
     }
