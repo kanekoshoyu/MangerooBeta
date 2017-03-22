@@ -1,7 +1,5 @@
 package info.androidhive.firebase;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,13 +16,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 import static android.app.PendingIntent.getActivity;
 
-public class UserDataActivity extends AppCompatActivity {
+public class DetailUserActivity extends AppCompatActivity {
     private String UID;
     private DatabaseReference mDatabase;
     private DatabaseReference mUserRef;
@@ -35,7 +31,7 @@ public class UserDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_data);
+        setContentView(R.layout.detail_user);
         Bundle extras = getIntent().getExtras();
         final String name;
 
@@ -61,7 +57,7 @@ public class UserDataActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 tv_free.setText(dataSnapshot.getValue(User.class).getFree());
-                //Toast.makeText(UserDataActivity.this, dataSnapshot.child("invitations").child(myUID).getValue(String.class) , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DetailUserActivity.this, dataSnapshot.child("invitations").child(myUID).getValue(String.class) , Toast.LENGTH_SHORT).show();
                 if(dataSnapshot.child("invitations").child(myUID).exists())
                     tv_lastInvitation.setText("Last Invitation: " + dataSnapshot.child("invitations").child(myUID).getValue(String.class));
 
@@ -140,7 +136,7 @@ public class UserDataActivity extends AppCompatActivity {
         tv_unfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserDataActivity.this, "unfriend " + name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailUserActivity.this, "unfriend " + name, Toast.LENGTH_SHORT).show();
                 mDatabase.child("users").child(myUID).child("friends").child(friendKey).removeValue();
             }
         });

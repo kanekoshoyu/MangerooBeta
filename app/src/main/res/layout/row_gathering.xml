@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_normal"
+    android:padding="@dimen/padding_slim"
     android:focusableInTouchMode="false"
     android:focusable="false">
     <ImageView
         android:id="@+id/listGatheringIcon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:contentDescription="@null" />
     <LinearLayout
         android:paddingLeft="@dimen/padding_normal"
@@ -17,7 +17,7 @@
         android:orientation="vertical">
         <TextView
             android:text="Title"
-            android:paddingBottom="@dimen/padding_slim"
+            android:padding="@dimen/padding_slim"
             android:id="@+id/listGatheringTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,9 +25,9 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18dp" />
-
         <TextView
             android:text="date"
+            android:padding="@dimen/padding_slim"
             android:id="@+id/listGatheringDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

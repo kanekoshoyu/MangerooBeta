@@ -11,13 +11,12 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="android.support.multidex.MultiDexApplication">
-
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/common_google_signin_btn_icon_light" />
@@ -26,7 +25,7 @@
             android:resource="@color/colorAccent" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAgwgfcKdqn0xFyxrmRUh7C9FL9zofvowY"/>
+            android:value="AIzaSyAgwgfcKdqn0xFyxrmRUh7C9FL9zofvowY" />
 
         <activity
             android:name=".LoginActivity"
@@ -50,7 +49,8 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SearchFriend" />
-        <activity android:name=".UserDataActivity" />
+        <activity android:name=".DetailUserActivity" />
+        <activity android:name=".DetailGatheringActivity" />
         <activity android:name=".MyDataSetting" />
 
         <service android:name=".fcm.MyFirebaseMessagingService">
@@ -67,7 +67,8 @@
             android:name=".fcm.MyIntentService"
             android:exported="false" />
 
-        <activity android:name=".AddGatheringActivity"></activity>
+        <activity android:name=".AddGatheringActivity" />
+        <activity android:name=".ConfirmationActivity"></activity>
     </application>
 
 </manifest>

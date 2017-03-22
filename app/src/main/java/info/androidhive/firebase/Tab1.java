@@ -5,27 +5,21 @@ import java.util.*;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -38,11 +32,12 @@ public class Tab1 extends Fragment {
     private DatabaseReference mUsers;
     private DatabaseReference mFreeRef;
     private FirebaseAuth auth;
-    private ArrayList<String> userNames = new ArrayList<>();
-    private ArrayList<String> userIds = new ArrayList<>();
-    private ArrayList<String> myFriends = new ArrayList<>();
+    private List<String> userNames = new ArrayList<>();
+    private List<String> userIds = new ArrayList<>();
+    private List<String> myFriends = new ArrayList<>();
 
     private List<User> FriendArrayList = new ArrayList<>();
+    private List<String> InvitationArrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +48,7 @@ public class Tab1 extends Fragment {
         mUsers = FirebaseDatabase.getInstance().getReference().child("users");
 
         ListView friendListView = (ListView) rootView.findViewById(R.id.friendList_view);
-        final AvailableFriendAdapter adapter = new AvailableFriendAdapter(getActivity(), FriendArrayList);
+        final AvailableFriendAdapter adapter = new AvailableFriendAdapter(getActivity(), FriendArrayList, InvitationArrayList, userIds);
         friendListView.setAdapter(adapter);
 
         auth = FirebaseAuth.getInstance();
@@ -68,7 +63,7 @@ public class Tab1 extends Fragment {
                 //Toast.makeText(getActivity(),Integer.toString(position), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getActivity(),Long.toString(id), Toast.LENGTH_SHORT).show();
                 String status = "friend";
-                Intent intent = new Intent(getActivity(), UserDataActivity.class);
+                Intent intent = new Intent(getActivity(), DetailUserActivity.class);
                 intent.putExtra("NAME", userNames.get(position));
                 intent.putExtra("STATUS", status);
                 intent.putExtra("UID", userIds.get(position));
@@ -77,16 +72,19 @@ public class Tab1 extends Fragment {
             }
         });
 
+
         mUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Me.myName = dataSnapshot.child(UID).child("username").getValue(String.class);
                 Me.myUID = UID;
-
                 myFriends.clear();
+
                 FriendArrayList.clear();
+                InvitationArrayList.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("friends").getChildren()) {
                     myFriends.add(postSnapshot.getValue(String.class));
+
                 }
 
                 progressBar.setVisibility(View.GONE);
@@ -105,6 +103,8 @@ public class Tab1 extends Fragment {
                         userIds.add(postSnapshot.getKey());
 
                         FriendArrayList.add(postSnapshot.getValue(User.class));
+                        for(DataSnapshot snapshot: dataSnapshot.child(UID).child("invitations").getChildren())
+                            InvitationArrayList.add(snapshot.getKey());
                         adapter.notifyDataSetChanged();
                     }
                 }

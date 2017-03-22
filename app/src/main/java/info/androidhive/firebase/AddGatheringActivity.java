@@ -60,6 +60,7 @@ public class AddGatheringActivity extends AppCompatActivity {
         Organise = (Button) findViewById(R.id.OrganiseButton);
         TitleRef = (EditText) findViewById(R.id.GatheringTitle);
         PlaceRef = (EditText) findViewById(R.id.GatheringPlace);
+        TitleRef.requestFocus();
 
         GatheringDate = (TextView) findViewById(R.id.tv_gatheringdate);
         GatheringDate.setText(Dformat.format(calendarDate.getTime()));
