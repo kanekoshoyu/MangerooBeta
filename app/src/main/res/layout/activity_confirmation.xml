@@ -12,12 +12,11 @@
         android:text="You and XXX have just agreed dining out!"
         android:textColor="@color/white"
         android:textSize="40sp" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="Meet XXX immediately at YYY"
+        android:text="\n1. Meet immediately\n2. Decide restaurant \n3. Think alternatives"
         android:textColor="@color/white"
         android:paddingBottom="@dimen/padding_normal"/>
     <RelativeLayout
@@ -57,17 +56,16 @@
             android:layout_centerHorizontal="true"
             android:paddingBottom="20dp"/>
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="Cancel"
-            android:textColor="@color/colorAccent"
-            android:layout_centerInParent="true"/>
+            android:text="There is no turn down"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:padding="@dimen/padding_normal"/>
     </RelativeLayout>
 </LinearLayout>

@@ -96,11 +96,10 @@ public class ConfirmationActivity extends AppCompatActivity implements View.OnCl
 
         } else {
             // changing stop icon to start icon
-            imageViewPause.setImageResource(R.drawable.common_google_signin_btn_icon_dark);
+            imageViewPause.setImageResource(R.drawable.ic_play_arrow_black_24dp);
             // changing the timer status to stopped
             timerStatus = TimerStatus.STOPPED;
             stopCountDownTimer();
-
         }
 
     }
@@ -127,7 +126,7 @@ public class ConfirmationActivity extends AppCompatActivity implements View.OnCl
                 // call to initialize the progress bar values
                 setProgressBarValues();
                 // changing stop icon to start icon
-                imageViewPause.setImageResource(R.drawable.common_google_signin_btn_icon_dark);
+                imageViewPause.setImageResource(R.drawable.ic_play_arrow_black_24dp);
                 // changing the timer status to stopped
                 timerStatus = TimerStatus.STOPPED;
             }

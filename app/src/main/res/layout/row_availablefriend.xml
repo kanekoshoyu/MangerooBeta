@@ -5,18 +5,17 @@
     android:orientation="horizontal"
     android:id="@+id/friendSearch"
     android:focusableInTouchMode="false"
-    android:padding="@dimen/padding_normal"
+    android:padding="@dimen/padding_slim"
     android:focusable="false">
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/listFriendIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@color/colorPrimaryLight"
-
         android:layout_gravity="center_horizontal"
-        app:civ_border_width="3dp"
+        app:civ_border_width="2dp"
         app:civ_border_color="@color/colorPrimaryDark"/>
     <TextView
         android:id="@+id/listFriendName"
@@ -31,18 +30,24 @@
         android:layout_toEndOf="@+id/listFriendIcon"
         android:padding="@dimen/padding_normal" />
     <Button
+        android:id="@+id/button_invite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:text="Invite"
         android:theme="@style/RedButton"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         />
 
     <Button
+        android:id="@+id/button_accept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:text="Accept"
         android:theme="@style/GreenButton"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:visibility="gone"/>
 </RelativeLayout>

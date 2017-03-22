@@ -32,11 +32,12 @@ public class Tab1 extends Fragment {
     private DatabaseReference mUsers;
     private DatabaseReference mFreeRef;
     private FirebaseAuth auth;
-    private ArrayList<String> userNames = new ArrayList<>();
-    private ArrayList<String> userIds = new ArrayList<>();
-    private ArrayList<String> myFriends = new ArrayList<>();
+    private List<String> userNames = new ArrayList<>();
+    private List<String> userIds = new ArrayList<>();
+    private List<String> myFriends = new ArrayList<>();
 
     private List<User> FriendArrayList = new ArrayList<>();
+    private List<String> InvitationArrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +48,7 @@ public class Tab1 extends Fragment {
         mUsers = FirebaseDatabase.getInstance().getReference().child("users");
 
         ListView friendListView = (ListView) rootView.findViewById(R.id.friendList_view);
-        final AvailableFriendAdapter adapter = new AvailableFriendAdapter(getActivity(), FriendArrayList);
+        final AvailableFriendAdapter adapter = new AvailableFriendAdapter(getActivity(), FriendArrayList, InvitationArrayList, userIds);
         friendListView.setAdapter(adapter);
 
         auth = FirebaseAuth.getInstance();
@@ -71,28 +72,19 @@ public class Tab1 extends Fragment {
             }
         });
 
-        //just for testing here
-        Button buttonConfirm = (Button) rootView.findViewById(R.id.button_confirmation);
-        buttonConfirm.setOnClickListener(new AdapterView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String status = "friend";
-                Intent intent = new Intent(getActivity(), ConfirmationActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         mUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Me.myName = dataSnapshot.child(UID).child("username").getValue(String.class);
                 Me.myUID = UID;
-
                 myFriends.clear();
+
                 FriendArrayList.clear();
+                InvitationArrayList.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("friends").getChildren()) {
                     myFriends.add(postSnapshot.getValue(String.class));
+
                 }
 
                 progressBar.setVisibility(View.GONE);
@@ -111,6 +103,8 @@ public class Tab1 extends Fragment {
                         userIds.add(postSnapshot.getKey());
 
                         FriendArrayList.add(postSnapshot.getValue(User.class));
+                        for(DataSnapshot snapshot: dataSnapshot.child(UID).child("invitations").getChildren())
+                            InvitationArrayList.add(snapshot.getKey());
                         adapter.notifyDataSetChanged();
                     }
                 }
