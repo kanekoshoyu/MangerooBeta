@@ -35,6 +35,7 @@ public class AvailableFriendAdapter extends BaseAdapter {
 
     private DatabaseReference mDatabase;
     private DatabaseReference mUserRef;
+    private DatabaseReference selfRef;
     private FirebaseAuth auth;
     private String myUID;
 
@@ -63,6 +64,7 @@ public class AvailableFriendAdapter extends BaseAdapter {
         myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mUserRef = mDatabase.child("users").child(UID);
+        selfRef = mDatabase.child("users").child(myUID);
 
         LayoutInflater mInflater = (LayoutInflater)
                 context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -112,16 +114,17 @@ public class AvailableFriendAdapter extends BaseAdapter {
             }
         });
 
-        mUserRef.child("invitations").addValueEventListener(new ValueEventListener() {
+        selfRef.child("invitations").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 if(invitations.contains(UID)){
                     holder.inviteButton.setVisibility(View.GONE);
                     holder.acceptButton.setVisibility(View.VISIBLE);
                 }
                 else{
-                    holder.inviteButton.setVisibility(View.VISIBLE);
                     holder.acceptButton.setVisibility(View.GONE);
+                    holder.inviteButton.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -27,7 +27,7 @@ public class SignupActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private void writeNewUser(String userId, String name, String email, String phoneNumber) {
-        User user = new User(userId, name, email, phoneNumber);
+        User user = new User(name, email, phoneNumber);
 
         mDatabase.child("users").child(userId).setValue(user);
     }
