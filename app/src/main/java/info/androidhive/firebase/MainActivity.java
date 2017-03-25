@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case (R.id.action_search):
-                        startActivity(new Intent(MainActivity.this, SearchFriend.class));
+                        startActivity(new Intent(MainActivity.this, SearchFriendActivity.class));
                 }
                 switch (item.getItemId()) {
                     case (R.id.action_userdata):

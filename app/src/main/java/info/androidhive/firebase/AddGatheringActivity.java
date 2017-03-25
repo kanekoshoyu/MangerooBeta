@@ -31,7 +31,7 @@ public class AddGatheringActivity extends AppCompatActivity {
     Calendar calendarStartTime = Calendar.getInstance();
     Calendar calendarEndTime = Calendar.getInstance();
     private EditText TitleRef, PlaceRef;
-    private TextView GatheringDate, GatheringStartTime, GatheringEndTime;
+    private TextView GatheringDate, GatheringStartTime, GatheringEndTime, InviteParticipantButton;
     private Button Organise;
 
     private String mTitle, mDate, mStartTime, mEndTime, mPlace;
@@ -61,6 +61,7 @@ public class AddGatheringActivity extends AppCompatActivity {
         TitleRef = (EditText) findViewById(R.id.GatheringTitle);
         PlaceRef = (EditText) findViewById(R.id.GatheringPlace);
         TitleRef.requestFocus();
+        InviteParticipantButton = (TextView) findViewById(R.id.Button_InviteParticipant);
 
         GatheringDate = (TextView) findViewById(R.id.tv_gatheringdate);
         GatheringDate.setText(Dformat.format(calendarDate.getTime()));
@@ -87,6 +88,12 @@ public class AddGatheringActivity extends AppCompatActivity {
             }
         });
 
+        InviteParticipantButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddGatheringActivity.this, SearchParticipantActivity.class));
+            }
+        });
 
         Organise.setOnClickListener(new View.OnClickListener() {
             @Override

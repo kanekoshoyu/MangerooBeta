@@ -16,12 +16,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.StringSignature;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 /**
  * Created by choiwaiyiu on 18/3/2017.
@@ -83,7 +89,35 @@ public class AvailableFriendAdapter extends BaseAdapter {
         }
 
         holder.txtName.setText(rowItem.getUsername());
-        holder.imageView.setImageResource(R.drawable.logo); //
+        mUserRef.child("profileModified").addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String date = dataSnapshot.getValue(String.class);
+                StorageReference pathReference = null;
+                if(date != null) {
+                    String path = "images/" + UID + ".jpg";
+                    pathReference = FirebaseStorage.getInstance().getReference().child(path);
+                }else{
+                    date = "0";
+                }
+
+                if(pathReference == null)pathReference = FirebaseStorage.getInstance().getReference().child("images/default.jpg");
+
+                Glide.with(context)
+                        .using(new FirebaseImageLoader())
+                        .load(pathReference)
+                        .centerCrop()
+                        .override(50, 50)
+                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                        //.skipMemoryCache(true)
+                        .signature(new StringSignature(date))
+                        .into(holder.imageView);
+            }
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {
+
+            }
+        });
         //final ViewHolder finalHolder = holder;
         holder.inviteButton.setOnClickListener(new View.OnClickListener() {
             @Override

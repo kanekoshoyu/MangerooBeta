@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Enter title"
+                android:textSize="@dimen/padding_normal"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 android:background="@android:color/transparent"
@@ -111,10 +112,36 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_place_black_24dp"/>
         <EditText
+            android:textSize="@dimen/padding_normal"
             android:id="@+id/GatheringPlace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="At"
+            android:inputType="text"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_normal"
+        android:orientation="horizontal">
+        <ImageView
+            android:paddingRight="@dimen/padding_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_group_add_black_24dp"/>
+        <TextView
+            android:id="@+id/Button_InviteParticipant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Invite Participants"
             android:inputType="text"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"

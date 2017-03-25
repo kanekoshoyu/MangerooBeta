@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class SearchFriend extends AppCompatActivity {
+public class SearchFriendActivity extends AppCompatActivity {
 
 
     private DatabaseReference mDatabase;
@@ -62,7 +62,7 @@ public class SearchFriend extends AppCompatActivity {
 
                 String item = ((TextView)view).getText().toString();
                 String status = "not friend";
-                Intent intent = new Intent(SearchFriend.this, DetailUserActivity.class);
+                Intent intent = new Intent(SearchFriendActivity.this, DetailUserActivity.class);
                 intent.putExtra("NAME", item);
                 intent.putExtra("STATUS", status);
                 intent.putExtra("UID", userIds.get(position));

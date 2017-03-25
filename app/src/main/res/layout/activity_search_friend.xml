@@ -10,7 +10,7 @@ android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:theme="@style/AppTheme.NoActionBar"
 
-tools:context="info.androidhive.firebase.SearchFriend">
+tools:context="info.androidhive.firebase.SearchFriendActivity">
 
 <android.support.design.widget.AppBarLayout
     android:id="@+id/appbar"
