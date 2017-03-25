@@ -51,7 +51,7 @@
         <activity android:name=".SearchFriendActivity" />
         <activity android:name=".DetailUserActivity" />
         <activity android:name=".DetailGatheringActivity" />
-        <activity android:name=".MyDataSetting" />
+        <activity android:name=".DetailMe" />
 
         <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
