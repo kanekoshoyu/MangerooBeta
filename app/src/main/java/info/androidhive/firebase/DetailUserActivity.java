@@ -5,15 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.StringSignature;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,6 +73,37 @@ public class DetailUserActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 throw databaseError.toException();
+            }
+        });
+
+
+        mUserRef.child("profileModified").addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String date = dataSnapshot.getValue(String.class);
+                StorageReference pathReference = null;
+                if(date != null) {
+                    String path = "images/" + UID + ".jpg";
+                    pathReference = FirebaseStorage.getInstance().getReference().child(path);
+                }else{
+                    date = "0";
+                }
+
+                if(pathReference == null)pathReference = FirebaseStorage.getInstance().getReference().child("images/default.jpg");
+
+                Glide.with(DetailUserActivity.this)
+                        .using(new FirebaseImageLoader())
+                        .load(pathReference)
+                        .centerCrop()
+                        .override(150, 150)
+                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                        //.skipMemoryCache(true)
+                        .signature(new StringSignature(date))
+                        .into((ImageView) findViewById(R.id.iv_icon));
+            }
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {
+
             }
         });
 
