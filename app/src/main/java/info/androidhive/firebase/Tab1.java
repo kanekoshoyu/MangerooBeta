@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -22,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+
+import info.androidhive.firebase.adapter.AvailableFriendAdapter;
 
 /**
  * Created by shoyu on 16/2/2017.

@@ -13,14 +13,13 @@
         android:gravity="center"
         android:orientation="vertical"
         android:background="@color/colorPrimary"
-        android:padding="@dimen/activity_horizontal_margin">
-
+        android:padding="@dimen/padding_normal">
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/padding_normal"
             android:src="@drawable/logo" />
 
         <android.support.design.widget.TextInputLayout

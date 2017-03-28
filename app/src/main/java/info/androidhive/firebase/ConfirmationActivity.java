@@ -88,7 +88,7 @@ public class ConfirmationActivity extends AppCompatActivity implements View.OnCl
             // call to initialize the progress bar values
             setProgressBarValues();
             // changing play icon to stop icon
-            imageViewPause.setImageResource(R.drawable.ic_close_black_24dp);
+            imageViewPause.setImageResource(R.drawable.ic_pause_black_24dp);
             // changing the timer status to started
             timerStatus = TimerStatus.STARTED;
             // call to start the count down timer

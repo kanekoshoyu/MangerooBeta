@@ -1,4 +1,4 @@
-package info.androidhive.firebase;
+package info.androidhive.firebase.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+
+import info.androidhive.firebase.Invitation;
+import info.androidhive.firebase.R;
 
 /**
  * Created by choiwaiyiu on 18/3/2017.

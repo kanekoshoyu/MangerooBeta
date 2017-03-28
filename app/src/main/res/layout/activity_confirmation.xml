@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryHyper"
     android:orientation="vertical">
 
     <TextView
@@ -22,8 +22,7 @@
     <RelativeLayout
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/colorPrimary">
+        android:layout_height="200dp">
 
         <ProgressBar
             android:id="@+id/progressBarCircle"

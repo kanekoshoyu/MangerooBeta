@@ -20,6 +20,7 @@
     <TextView
         android:id="@+id/listFriendName"
         android:text="Friend Name Here"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
@@ -35,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:text="Invite"
-        android:theme="@style/RedButton"
+        android:theme="@style/HighButton"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:visibility="gone"
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:text="Accept"
-        android:theme="@style/GreenButton"
+        android:theme="@style/LowButton"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:visibility="gone"/>

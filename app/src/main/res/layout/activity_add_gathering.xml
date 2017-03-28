@@ -161,7 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Organise gathering"
-            android:theme="@style/RedButton"/>
+            android:theme="@style/HighButton"/>
     </LinearLayout>
 
 </LinearLayout>

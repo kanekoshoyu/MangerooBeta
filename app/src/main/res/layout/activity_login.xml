@@ -31,7 +31,6 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
                 android:textColor="@android:color/black"
@@ -54,15 +53,22 @@
         </android.support.design.widget.TextInputLayout>
 
         <!-- Login Button -->
-
         <Button
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
             android:text="@string/btn_login"
-            android:background="@color/colorAccent"
-            android:textColor="@android:color/white" />
+            style="@style/HighButton" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="or"
+            android:textAlignment="center"/>
+
+        <com.google.android.gms.common.SignInButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/googleBtn"/>
 
         <Button
             android:id="@+id/btn_reset_password"

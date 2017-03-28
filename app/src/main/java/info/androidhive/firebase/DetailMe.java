@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -73,6 +74,8 @@ public class DetailMe extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         setContentView(R.layout.detail_me);
         Button signOut = (Button) findViewById(R.id.sign_out);
 

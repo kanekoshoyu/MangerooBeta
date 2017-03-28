@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import info.androidhive.firebase.adapter.NewFriendAdapter;
+
 public class SearchFriendActivity extends AppCompatActivity {
 
 

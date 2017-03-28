@@ -1,4 +1,4 @@
-package info.androidhive.firebase;
+package info.androidhive.firebase.adapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -28,6 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import info.androidhive.firebase.ConfirmationActivity;
+import info.androidhive.firebase.Me;
+import info.androidhive.firebase.R;
+import info.androidhive.firebase.User;
 
 /**
  * Created by choiwaiyiu on 18/3/2017.
@@ -144,6 +148,7 @@ public class AvailableFriendAdapter extends BaseAdapter {
         holder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((Activity)context).finish();
                 context.startActivity(new Intent(context, ConfirmationActivity.class));
             }
         });

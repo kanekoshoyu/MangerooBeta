@@ -1,4 +1,4 @@
-package info.androidhive.firebase;
+package info.androidhive.firebase.adapter;
 
 import java.util.List;
 import android.app.Activity;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import info.androidhive.firebase.Gathering;
+import info.androidhive.firebase.R;
 
 public class GatheringAdapter extends BaseAdapter {
     Context context;

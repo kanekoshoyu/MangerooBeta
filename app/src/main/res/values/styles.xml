@@ -17,12 +17,12 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="RedButton" parent="Widget.AppCompat.Button.Colored">
+    <style name="HighButton" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/colorAccent</item>
         <item name="android:textColor">@color/white</item>
     </style>
-    <style name="GreenButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="colorButtonNormal">@color/colorPrimary</item>
+    <style name="LowButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/colorPrimaryHyper</item>
         <item name="android:textColor">@color/white</item>
     </style>
 

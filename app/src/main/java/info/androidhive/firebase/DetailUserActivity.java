@@ -1,6 +1,7 @@
 package info.androidhive.firebase;
 
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,8 @@ public class DetailUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         setContentView(R.layout.detail_user);
         Bundle extras = getIntent().getExtras();
         final String name;
@@ -166,8 +169,7 @@ public class DetailUserActivity extends AppCompatActivity {
                 mDatabase.child("users").child(UID).child("notifications").child("invitations").child(myUID).child("time").setValue(strDate);
                 mDatabase.child("users").child(UID).child("notifications").child("invitations").child(myUID).child("username").setValue(Me.myName);
 
-                Snackbar.make(v, "You have sent an invitation!", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
+                Snackbar.make(v, "You have sent an invitation!", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
             }
         });
 
