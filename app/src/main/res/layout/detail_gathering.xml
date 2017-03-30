@@ -15,25 +15,57 @@
         android:layout_marginBottom="20dp"
         android:orientation="horizontal">
         <TextView
+            android:textAlignment="center"
+            android:text="Title of Gathering"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_gathering_title"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Title"
+            android:text="Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_weight="1"/>
+            android:layout_weight="2"/>
         <TextView
+            android:id="@+id/tv_gathering_date"
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Title of Gathering"
+            android:text="Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_name"
             android:layout_weight="1"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="Time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="2"/>
+        <TextView
+            android:id="@+id/tv_gathering_time"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="Time details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
@@ -41,8 +73,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_weight="1"/>
+            android:layout_weight="2"/>
         <TextView
+            android:id="@+id/tv_gathering_venue"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:text="venue details"
             android:layout_width="match_parent"
@@ -53,44 +86,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/padding_normal">
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1"/>
-        <TextView
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Time details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
-        <TextView
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Person-in-charge"
+            android:text="Organiser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_emailTag"
-            android:layout_weight="1" />
+            android:layout_weight="2" />
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
+            android:id="@+id/tv_gathering_organiser"
             android:text="username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text"
             android:layout_weight="1"/>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,8 +118,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_phoneTag"
-            android:layout_weight="1" />
+            android:layout_weight="2" />
         <TextView
+            android:id="@+id/tv_gathering_participant_going"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:text="friend username"
             android:layout_width="match_parent"
@@ -122,8 +139,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_freeTag"
-            android:layout_weight="1" />
+            android:layout_weight="2" />
         <TextView
+            android:id="@+id/tv_gathering_participant_interested"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:text="friend username"
             android:layout_width="match_parent"

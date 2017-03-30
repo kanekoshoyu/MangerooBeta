@@ -29,6 +29,7 @@ public class Tab2 extends Fragment{
 
     private DatabaseReference mGatherings;
     private List<Gathering> gatheringArrayList = new ArrayList<>();
+    private List<String> GIDs = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +57,9 @@ public class Tab2 extends Fragment{
                                     long id) {
                 //Toast.makeText(getActivity(),Integer.toString(position), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getActivity(),Long.toString(id), Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(getActivity(), DetailGatheringActivity.class);
+                intent.putExtra("GID", GIDs.get(position));
                 //Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
 
@@ -68,8 +71,10 @@ public class Tab2 extends Fragment{
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 gatheringArrayList.clear();
+                GIDs.clear();
 
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    GIDs.add(postSnapshot.getKey());
                     String tHolderID, tTitle, tDate, tStartTime, tEndTime, tPlace;
                     tHolderID = postSnapshot.child("holderID").getValue(String.class);
                     tTitle = postSnapshot.child("title").getValue(String.class);
