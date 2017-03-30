@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,7 @@ import info.androidhive.firebase.adapter.GatheringAdapter;
 
 public class Tab2 extends Fragment{
 
+    private FirebaseAuth auth;
     private DatabaseReference mGatherings;
     private List<Gathering> gatheringArrayList = new ArrayList<>();
     private List<String> GIDs = new ArrayList<>();
@@ -36,6 +38,9 @@ public class Tab2 extends Fragment{
                              Bundle savedInstanceState) {
         //Inflate the View first to facilitate findViewById
         View rootView = inflater.inflate(R.layout.tab2, container, false);
+
+        auth = FirebaseAuth.getInstance();
+        final String UID = auth.getCurrentUser().getUid();
 
         mGatherings = FirebaseDatabase.getInstance().getReference().child("gathering");
 
@@ -82,7 +87,9 @@ public class Tab2 extends Fragment{
                     tStartTime = postSnapshot.child("startTime").getValue(String.class);
                     tEndTime = postSnapshot.child("endTime").getValue(String.class);
                     tPlace = postSnapshot.child("place").getValue(String.class);
-                    gatheringArrayList.add(new Gathering(tHolderID, tTitle, tDate, tStartTime, tEndTime, tPlace));
+
+                    if(tHolderID.equals(UID))
+                        gatheringArrayList.add(new Gathering(tHolderID, tTitle, tDate, tStartTime, tEndTime, tPlace));
                 }
                 adapter.notifyDataSetChanged();
             }
