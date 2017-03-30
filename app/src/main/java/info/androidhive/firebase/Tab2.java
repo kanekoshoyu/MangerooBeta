@@ -89,7 +89,9 @@ public class Tab2 extends Fragment{
 
                     if(tHolderID.equals(UID)) {
                         GIDs.add(postSnapshot.getKey());
-                        gatheringArrayList.add(new Gathering(tHolderID, tTitle, tDate, tStartTime, tEndTime, tPlace));
+                        /////////////////////////////////////////////
+                        List<String> nothing = new ArrayList<String>();
+                        gatheringArrayList.add(new Gathering(tHolderID, tTitle, tDate, tStartTime, tEndTime, tPlace, nothing));
                     }
                 }
                 adapter.notifyDataSetChanged();

@@ -2,6 +2,7 @@ package info.androidhive.firebase.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -24,8 +26,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import info.androidhive.firebase.ConfirmationActivity;
+import info.androidhive.firebase.DataTransferInterface;
 import info.androidhive.firebase.R;
 import info.androidhive.firebase.User;
 
@@ -34,9 +39,12 @@ import info.androidhive.firebase.User;
  */
 
 public class ParticipantSearchListRowAdapter extends BaseAdapter {
+    DataTransferInterface dtInterface;
     Context context;
     List<User> rowItems;
     List<String> ids;
+    ArrayList<String> participantIDs;
+    ArrayList<String> checked;
 
     private DatabaseReference mDatabase;
     private DatabaseReference mUserRef;
@@ -50,13 +58,17 @@ public class ParticipantSearchListRowAdapter extends BaseAdapter {
         CheckBox checkBox;
     }
 
-    public ParticipantSearchListRowAdapter(Context context, List<User> items, List<String> ids) {
+    public ParticipantSearchListRowAdapter(Context context, DataTransferInterface dtInterface, List<User> items, List<String> ids, ArrayList<String> participantIDs, ArrayList<String> checked) {
         this.context = context;
+        this.dtInterface = dtInterface;
         this.rowItems = items;
         this.ids = ids;
+        this.participantIDs = participantIDs;
+        //Toast.makeText(context, checked.size()+"", Toast.LENGTH_SHORT).show();
+        this.checked = new ArrayList<>(checked);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         final ParticipantSearchListRowAdapter.ViewHolder holder;
         final User rowItem = (User) getItem(position);
         final String UID = ids.get(position);
@@ -81,6 +93,12 @@ public class ParticipantSearchListRowAdapter extends BaseAdapter {
         else {
             holder = (ParticipantSearchListRowAdapter.ViewHolder) convertView.getTag();
         }
+
+        //Toast.makeText(context, position+" "+checked.get(position), Toast.LENGTH_SHORT).show();
+        if(checked.get(position).equals("not checked"))
+            holder.checkBox.setChecked(false);
+        if(checked.get(position).equals("checked"))
+            holder.checkBox.setChecked(true);
 
         holder.txtName.setText(rowItem.getUsername());
         mUserRef.child("profileModified").addValueEventListener(new ValueEventListener(){
@@ -112,6 +130,32 @@ public class ParticipantSearchListRowAdapter extends BaseAdapter {
 
             }
         });
+
+
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checked.get(position).equals("not checked")){
+                    participantIDs.add(UID);
+                    checked.set(position, "checked");
+                    ///////////
+                    /*
+                    for(int i=0; i<participantIDs.size(); i++)
+                        Toast.makeText(context, participantIDs.get(i), Toast.LENGTH_SHORT).show();
+                    */
+                }
+                else{
+                    for(int i=0; i<participantIDs.size(); i++)
+                        if(participantIDs.get(i).equals(UID)){
+                            participantIDs.remove(i);
+                            break;
+                        }
+                    checked.set(position, "not checked");
+                }
+                dtInterface.setValues(checked);
+            }
+        });
+
 
         return convertView;
     }

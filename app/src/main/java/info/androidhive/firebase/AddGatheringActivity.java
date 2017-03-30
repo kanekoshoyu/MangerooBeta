@@ -17,10 +17,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class AddGatheringActivity extends AppCompatActivity {
@@ -35,14 +42,23 @@ public class AddGatheringActivity extends AppCompatActivity {
     private Button Organise;
 
     private String mTitle, mDate, mStartTime, mEndTime, mPlace;
+    private List<String> participantIDs = new ArrayList<>();
+    private List<String> checked = new ArrayList<>();
 
     SimpleDateFormat Dformat = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat Tformat = new SimpleDateFormat("HH:mm");
 
-    private void addNewGathering(String HolderID, String Title, String Date, String StartTime, String EndTime, String Place) {
-        Gathering gathering = new Gathering(HolderID, Title, Date, StartTime, EndTime, Place);
+    private void addNewGathering(String HolderID, String Title, String Date, String StartTime, String EndTime, String Place, List<String> participantIDs) {
+        Gathering gathering = new Gathering(HolderID, Title, Date, StartTime, EndTime, Place, participantIDs);
         String key = mDatabase.child("gathering").push().getKey();
         mDatabase.child("gathering").child(key).setValue(gathering);
+
+        ///////////////////////////////////////////
+        for(int i=0; i<participantIDs.size(); i++){
+            String pKey = mDatabase.child("gathering").child(key).child("participants").push().getKey();
+            mDatabase.child("gathering").child(key).child("participants").child(pKey).setValue(participantIDs.get(i));
+        }
+        //////////////////////////////////////////
     }
 
 
@@ -57,6 +73,22 @@ public class AddGatheringActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         final String UID = auth.getCurrentUser().getUid();
+
+        mDatabase.child("users").child(UID).child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long friendCount = dataSnapshot.getChildrenCount();
+                for(int i=0; i<friendCount; i++)
+                    checked.add(new String("not checked"));
+                //Toast.makeText(AddGatheringActivity.this, checked.size()+"HEY", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         Organise = (Button) findViewById(R.id.OrganiseButton);
         TitleRef = (EditText) findViewById(R.id.GatheringTitle);
         PlaceRef = (EditText) findViewById(R.id.GatheringPlace);
@@ -91,7 +123,11 @@ public class AddGatheringActivity extends AppCompatActivity {
         InviteParticipantButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddGatheringActivity.this, SearchParticipantActivity.class));
+                Intent intent = new Intent(AddGatheringActivity.this, SearchParticipantActivity.class);
+                intent.putStringArrayListExtra("participantIDs",(ArrayList<String>) participantIDs);
+                //Toast.makeText(AddGatheringActivity.this, checked.size()+"", Toast.LENGTH_SHORT).show();
+                intent.putStringArrayListExtra("checked", (ArrayList<String>) checked);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -103,7 +139,7 @@ public class AddGatheringActivity extends AppCompatActivity {
                 mStartTime = GatheringStartTime.getText().toString().trim();
                 mEndTime = GatheringEndTime.getText().toString().trim();
                 mPlace = PlaceRef.getText().toString().trim();
-                addNewGathering(UID, mTitle, mDate, mStartTime, mEndTime, mPlace);
+                addNewGathering(UID, mTitle, mDate, mStartTime, mEndTime, mPlace, participantIDs);
                 startActivity(new Intent(AddGatheringActivity.this, MainActivity.class));
             }
         });
@@ -147,4 +183,14 @@ public class AddGatheringActivity extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==1){
+            participantIDs = data.getStringArrayListExtra("participantIDs");
+            checked = data.getStringArrayListExtra("checked");
+        }
+    }
 }
