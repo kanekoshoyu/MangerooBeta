@@ -1,16 +1,13 @@
 package info.androidhive.firebase;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,73 +17,68 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import info.androidhive.firebase.adapter.NewFriendAdapter;
+import info.androidhive.firebase.R;
+import info.androidhive.firebase.adapter.AvailableFriendAdapter;
+import info.androidhive.firebase.adapter.ParticipantSearchListRowAdapter;
+
+import static info.androidhive.firebase.R.id.container;
 
 public class SearchParticipantActivity extends AppCompatActivity {
 
-    private DatabaseReference mDatabase;
-    private DatabaseReference mFreeRef;
+    private DatabaseReference mUsers;
     private FirebaseAuth auth;
-    private ArrayList<String> userNames = new ArrayList<>();
-    private ArrayList<String> userIds = new ArrayList<>();
-    private String myUID;
+
+    private List<String> myFriends = new ArrayList<>();
+    private List<String> userIds = new ArrayList<>();
+    private List<User> FriendArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
         setContentView(R.layout.activity_search_participant);
 
-        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
-        myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        SearchView searchView = (SearchView) findViewById(R.id.searchView);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userNames);
-        ListView friendListView = (ListView) findViewById(R.id.friendSearch_List);
-        NewFriendAdapter useradapter;
+        /*
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.menu_participant_search_list, menu);
+            return true;
+        }
+        */
 
-        friendListView.setAdapter(adapter);
-
-
+        mUsers = FirebaseDatabase.getInstance().getReference().child("users");
         auth = FirebaseAuth.getInstance();
         final String UID = auth.getCurrentUser().getUid();
-        mFreeRef = mDatabase.child("users").child(UID).child("free");
+
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.participantSearchListProgressBar);
+        ListView participantList = (ListView) findViewById(R.id.participantSearchList_view);
+        final ParticipantSearchListRowAdapter adapter = new ParticipantSearchListRowAdapter(this, FriendArrayList, userIds);
+        participantList.setAdapter(adapter);
 
 
-        friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-
-                String item = ((TextView)view).getText().toString();
-                String status = "not friend";
-                Intent intent = new Intent(SearchParticipantActivity.this, DetailUserActivity.class);
-                intent.putExtra("NAME", item);
-                intent.putExtra("STATUS", status);
-                intent.putExtra("UID", userIds.get(position));
-                startActivity(intent);
-
-
-            }
-        });
-
-
-        mDatabase.child("users").addValueEventListener(new ValueEventListener() {
+        mUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                userNames.clear();
+                progressBar.setVisibility(View.GONE);
                 userIds.clear();
+                myFriends.clear();
+                FriendArrayList.clear();
+
+                for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("friends").getChildren()) {
+                    myFriends.add(postSnapshot.getValue(String.class));
+                }
+
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    if(!postSnapshot.getKey().equals(myUID)) {
-                        userNames.add(postSnapshot.getValue(User.class).getUsername() + "");
-                        adapter.notifyDataSetChanged();
+                    //Updates Friend List here
+                    if(myFriends.contains(postSnapshot.getKey())){
                         userIds.add(postSnapshot.getKey());
+                        FriendArrayList.add(postSnapshot.getValue(User.class));
+
+                        adapter.notifyDataSetChanged();
                     }
                 }
-                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -94,17 +86,6 @@ public class SearchParticipantActivity extends AppCompatActivity {
                 throw databaseError.toException();
             }
         });
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
     }
 }

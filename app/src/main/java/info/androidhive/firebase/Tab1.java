@@ -85,7 +85,6 @@ public class Tab1 extends Fragment {
                 InvitationArrayList.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.child(UID).child("friends").getChildren()) {
                     myFriends.add(postSnapshot.getValue(String.class));
-
                 }
 
                 progressBar.setVisibility(View.GONE);

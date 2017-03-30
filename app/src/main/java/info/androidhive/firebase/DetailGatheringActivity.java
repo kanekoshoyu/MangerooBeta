@@ -47,9 +47,10 @@ public class DetailGatheringActivity extends AppCompatActivity {
                 tv_date.setText(dataSnapshot.child("date").getValue().toString());
 
                 //tv_free.setText(dataSnapshot.getValue(User.class).getFree());
-                //Toast.makeText(DetailUserActivity.this, dataSnapshot.child("invitations").child(myUID).getValue(String.class) , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DetailGatheringActivity.this, dataSnapshot.child("invitations").child(myUID).getValue(String.class) , Toast.LENGTH_SHORT).show();
 
                 DatabaseReference mUserRef = mDatabase.child("users").child(dataSnapshot.child("holderID").getValue().toString());
+
                 mUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

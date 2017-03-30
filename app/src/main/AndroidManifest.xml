@@ -52,6 +52,7 @@
         <activity android:name=".DetailUserActivity" />
         <activity android:name=".DetailGatheringActivity" />
         <activity android:name=".DetailMe" />
+        <activity android:name=".SearchParticipantActivity" />
 
         <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
@@ -69,7 +70,7 @@
 
         <activity android:name=".AddGatheringActivity" />
         <activity android:name=".ConfirmationActivity" />
-        <activity android:name=".SearchParticipantActivity"></activity>
+        <activity android:name=".fcm.SearchParticipantActivity"></activity>
     </application>
 
 </manifest>

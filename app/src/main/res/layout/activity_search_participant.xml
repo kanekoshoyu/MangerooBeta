@@ -1,53 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:paddingTop="8dp"
     android:orientation="vertical"
-    android:theme="@style/AppTheme.NoActionBar"
+    android:weightSum="1">
 
-    tools:context="info.androidhive.firebase.SearchParticipantActivity">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"/>
+    <TextView
+        android:padding="@dimen/padding_slim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:weightSum="1">
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/searchView"
-                android:gravity="end"
-                android:iconifiedByDefault="false"/>
-
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
-
+        android:text="Select Participant"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/div_bg"/>
     <ProgressBar
-        android:layout_marginTop="@dimen/padding_normal"
-        android:id="@+id/progressBar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center|bottom"
-        android:layout_marginBottom="20dp"
+        android:padding="@dimen/padding_normal"
+        android:id="@+id/participantSearchListProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:visibility="visible" />
 
     <ListView
+        android:id="@+id/participantSearchList_view"
         android:layout_width="match_parent"
+        android:layout_height="470dp" />
+
+    <Button
+        android:id="@+id/InviteParticipantButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/friendSearch_List" />
+        android:text="Add friends to invitation list"
+        android:theme="@style/LowButton"
+        android:layout_gravity="center_horizontal"/>
+
 
 </LinearLayout>
