@@ -79,7 +79,6 @@ public class Tab2 extends Fragment{
                 GIDs.clear();
 
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    GIDs.add(postSnapshot.getKey());
                     String tHolderID, tTitle, tDate, tStartTime, tEndTime, tPlace;
                     tHolderID = postSnapshot.child("holderID").getValue(String.class);
                     tTitle = postSnapshot.child("title").getValue(String.class);
@@ -88,8 +87,10 @@ public class Tab2 extends Fragment{
                     tEndTime = postSnapshot.child("endTime").getValue(String.class);
                     tPlace = postSnapshot.child("place").getValue(String.class);
 
-                    if(tHolderID.equals(UID))
+                    if(tHolderID.equals(UID)) {
+                        GIDs.add(postSnapshot.getKey());
                         gatheringArrayList.add(new Gathering(tHolderID, tTitle, tDate, tStartTime, tEndTime, tPlace));
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
