@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -82,7 +83,7 @@ public class SearchFriendActivity extends AppCompatActivity {
                 userIds.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                         if(!postSnapshot.getKey().equals(myUID)) {
-                            userNames.add(postSnapshot.getValue(User.class).getUsername() + "");
+                            userNames.add(postSnapshot.child("username").getValue(String.class));
                             adapter.notifyDataSetChanged();
                             userIds.add(postSnapshot.getKey());
                         }

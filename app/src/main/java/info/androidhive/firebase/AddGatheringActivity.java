@@ -53,6 +53,7 @@ public class AddGatheringActivity extends AppCompatActivity {
     private String mTitle, mDate, mStartTime, mEndTime, mPlace;
     private List<String> participantIDs = new ArrayList<>();
     private List<String> checked = new ArrayList<>();
+    ParticipantAdapter adapter;
 
     SimpleDateFormat Dformat = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat Tformat = new SimpleDateFormat("HH:mm");
@@ -87,14 +88,16 @@ public class AddGatheringActivity extends AppCompatActivity {
 
         ListView participantList = (ListView) findViewById(R.id.participantList);
 
-        final ParticipantAdapter adapter = new ParticipantAdapter(AddGatheringActivity.this, ParticipantArrayList, userIds);
+        adapter = new ParticipantAdapter(AddGatheringActivity.this, ParticipantArrayList, userIds);
         participantList.setAdapter(adapter);
 
         mUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                /*
                 if(!dataSnapshot.hasChild("Trigger"))
                     mUsers.child("Trigger").setValue("0");
+                    */
                 ////////////////////////////////////////
                 userIds.clear();
                 //myParticipants.clear();
@@ -108,12 +111,16 @@ public class AddGatheringActivity extends AppCompatActivity {
 
                         adapter.notifyDataSetChanged();
                     }
+                    /*
                     if(postSnapshot.getKey().equals("Trigger"))
                         trigger = postSnapshot.getValue(String.class);
+                        */
                 }
+                /*
                 int tempTrigger = Integer.parseInt(trigger);
                 tempTrigger = (tempTrigger+1)%2;
                 trigger = String.valueOf(tempTrigger);
+                */
             }
 
             @Override
@@ -239,7 +246,48 @@ public class AddGatheringActivity extends AppCompatActivity {
         if(data!=null&&requestCode==1){
             participantIDs = data.getStringArrayListExtra("participantIDs");
             checked = data.getStringArrayListExtra("checked");
+
+            mUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                /*
+                if(!dataSnapshot.hasChild("Trigger"))
+                    mUsers.child("Trigger").setValue("0");
+                    */
+                    ////////////////////////////////////////
+                    userIds.clear();
+                    //myParticipants.clear();
+                    ParticipantArrayList.clear();
+
+                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                        //Updates Friend List here
+                        if(participantIDs.contains(postSnapshot.getKey())){
+                            userIds.add(postSnapshot.getKey());
+                            ParticipantArrayList.add(postSnapshot.getValue(User.class));
+
+                            adapter.notifyDataSetChanged();
+                        }
+                    /*
+                    if(postSnapshot.getKey().equals("Trigger"))
+                        trigger = postSnapshot.getValue(String.class);
+                        */
+                    }
+                /*
+                int tempTrigger = Integer.parseInt(trigger);
+                tempTrigger = (tempTrigger+1)%2;
+                trigger = String.valueOf(tempTrigger);
+                */
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    throw databaseError.toException();
+                }
+            });
+
         }
+        /*
         mUsers.child("Trigger").setValue(trigger);
+        */
     }
 }
