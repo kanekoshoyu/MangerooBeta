@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -29,10 +30,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import info.androidhive.firebase.adapter.ParticipantAdapter;
+
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class AddGatheringActivity extends AppCompatActivity {
-    private DatabaseReference mDatabase;
+    private String trigger;
+    ///////////////////////////
+    private DatabaseReference mDatabase, mUsers;
     private FirebaseAuth auth;
+
+    //private List<String> myParticipants = new ArrayList<>();
+    private List<String> userIds = new ArrayList<>();
+    private List<User> ParticipantArrayList = new ArrayList<>();
 
     Calendar calendarDate = Calendar.getInstance();
     Calendar calendarStartTime = Calendar.getInstance();
@@ -69,10 +78,49 @@ public class AddGatheringActivity extends AppCompatActivity {
         actionBar.hide();
         setContentView(R.layout.activity_add_gathering);
 
+
         auth = FirebaseAuth.getInstance();
+        mUsers = FirebaseDatabase.getInstance().getReference().child("users");
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         final String UID = auth.getCurrentUser().getUid();
+
+        ListView participantList = (ListView) findViewById(R.id.participantList);
+
+        final ParticipantAdapter adapter = new ParticipantAdapter(AddGatheringActivity.this, ParticipantArrayList, userIds);
+        participantList.setAdapter(adapter);
+
+        mUsers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.hasChild("Trigger"))
+                    mUsers.child("Trigger").setValue("0");
+                ////////////////////////////////////////
+                userIds.clear();
+                //myParticipants.clear();
+                ParticipantArrayList.clear();
+
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    //Updates Friend List here
+                    if(participantIDs.contains(postSnapshot.getKey())){
+                        userIds.add(postSnapshot.getKey());
+                        ParticipantArrayList.add(postSnapshot.getValue(User.class));
+
+                        adapter.notifyDataSetChanged();
+                    }
+                    if(postSnapshot.getKey().equals("Trigger"))
+                        trigger = postSnapshot.getValue(String.class);
+                }
+                int tempTrigger = Integer.parseInt(trigger);
+                tempTrigger = (tempTrigger+1)%2;
+                trigger = String.valueOf(tempTrigger);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
 
         mDatabase.child("users").child(UID).child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -192,5 +240,6 @@ public class AddGatheringActivity extends AppCompatActivity {
             participantIDs = data.getStringArrayListExtra("participantIDs");
             checked = data.getStringArrayListExtra("checked");
         }
+        mUsers.child("Trigger").setValue(trigger);
     }
 }

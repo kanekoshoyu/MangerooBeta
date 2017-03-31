@@ -152,6 +152,10 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"/>
+    <ListView
+        android:id="@+id/participantList"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"></ListView>
     <LinearLayout
         android:padding="@dimen/padding_normal"
         android:layout_width="match_parent"
