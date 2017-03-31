@@ -236,7 +236,7 @@ public class AddGatheringActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==1){
+        if(data!=null&&requestCode==1){
             participantIDs = data.getStringArrayListExtra("participantIDs");
             checked = data.getStringArrayListExtra("checked");
         }
