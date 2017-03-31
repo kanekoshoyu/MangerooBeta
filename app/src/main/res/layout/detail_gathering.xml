@@ -119,12 +119,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_phoneTag"
             android:layout_weight="2" />
-        <TextView
-            android:id="@+id/tv_gathering_participant_going"
+        <ListView
+            android:id="@+id/gatheringGoingList"
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="friend username"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_weight="1"/>
     </LinearLayout>
 
