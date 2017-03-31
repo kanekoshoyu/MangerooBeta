@@ -36,6 +36,9 @@ public class ConfirmationActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
+
+        TextView msg = (TextView) findViewById(R.id.tv_message);
+        msg.setText("You and " + getIntent().getStringExtra("UNAME") + " have just agreed dining out!");
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 

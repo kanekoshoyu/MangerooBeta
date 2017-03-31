@@ -7,9 +7,10 @@
 
     <TextView
         android:padding="@dimen/padding_normal"
+        android:id="@+id/tv_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You and XXX have just agreed dining out!"
+        android:text="You and have just agreed dining out!"
         android:textColor="@color/white"
         android:textSize="40sp" />
     <TextView

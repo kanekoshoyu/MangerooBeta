@@ -1,6 +1,7 @@
 package info.androidhive.firebase.adapter;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import android.app.Activity;
@@ -48,7 +49,6 @@ public class AvailableFriendAdapter extends BaseAdapter {
     private DatabaseReference selfRef;
     private FirebaseAuth auth;
     private String myUID;
-
 
 
     public AvailableFriendAdapter(Context context, List<User> items, List<String> invitations, List<String> ids) {
@@ -148,8 +148,11 @@ public class AvailableFriendAdapter extends BaseAdapter {
         holder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(context, ConfirmationActivity.class);
+                intent.putExtra("UNAME", rowItem.getUsername());
                 ((Activity)context).finish();
-                context.startActivity(new Intent(context, ConfirmationActivity.class));
+                context.startActivity(intent);
             }
         });
 

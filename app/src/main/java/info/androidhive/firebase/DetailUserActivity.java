@@ -152,7 +152,7 @@ public class DetailUserActivity extends AppCompatActivity {
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users").child(myUID);
                 //myRef.child("friends").child(UID).setValue("");
                 myRef.child("friends").push().setValue(UID);
-                Toast.makeText(getApplicationContext(),name + "is now your friend", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),name + "is now your friend", Toast.LENGTH_SHORT).show();
 
                 btn_Add.setVisibility(View.GONE);
             }
